@@ -1,0 +1,43 @@
+/* Flash */
+
+.flash-notice {
+  @apply panel-success;
+}
+
+.flash-info {
+  @apply panel-info;
+}
+
+.flash-warning {
+  @apply panel-warning;
+}
+
+.flash-alert {
+  @apply panel-alert;
+}
+
+.appear-then-fade {
+  animation: appear-then-fade 10s both;
+}
+
+@keyframes appear-then-fade {
+  0%, 100% {
+    opacity: 0
+  }
+  5%, 60% {
+    opacity: 1
+  }
+}
+
+.fade-out {
+  animation: fade-out 1s both;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0
+  }
+}

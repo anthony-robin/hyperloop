@@ -1,0 +1,46 @@
+/* Form */
+
+form label {
+  @apply dark:text-white;
+}
+
+form label:not(.boolean) {
+  @apply mb-2;
+}
+
+input.string, input.password, input.numeric,
+input.date, input.time, select.select,
+textarea.text, input.file {
+  @apply rounded-lg dark:bg-slate-700/25 dark:text-white focus:ring-secondary-color focus:border-transparent;
+}
+
+.error, .error_notification {
+  @apply text-red-500 italic text-sm;
+}
+
+.field_with_errors input,
+.field_with_errors textarea {
+  @apply border-red-500;
+}
+
+.field_with_errors input:focus,
+.field_with_errors textarea:focus {
+  @apply border-red-500 ring-red-500;
+}
+
+.hint {
+  @apply block mt-2 text-blue-500 dark:text-blue-400 text-sm;
+}
+
+.hint:before {
+  content: 'ℹ️ ';
+  @apply mr-0.5;
+}
+
+input.boolean, input.check_boxes {
+  @apply inline-block w-4 mr-1 appearance-none checked:bg-secondary-color checked:hover:bg-secondary-color;
+}
+
+label.boolean, label.check_boxes {
+  @apply block;
+}

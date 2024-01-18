@@ -1,0 +1,12 @@
+- flash.each do |flash_type, message|
+  - if flash_type == 'notice'
+    - flash_classes = 'flash-notice'
+  - elsif flash_type == 'info'
+    - flash_classes = 'flash-info'
+  - elsif flash_type == 'warning'
+    - flash_classes = 'flash-warning'
+  - else
+    - flash_classes = 'flash-alert'
+
+  .flex.p-4.mb-4.text-sm.border.rounded-lg role="alert" class=flash_classes
+    = simple_format message

@@ -1,0 +1,33 @@
+fr:
+  seo:
+    default:
+      title: Titre de la page
+      description: Description de la page
+
+    homes:
+      show:
+        title: Accueil
+
+    password_resets:
+      new:
+        title: Réinitialisation du mot de passe
+      edit:
+        title: Réinitialisation du mot de passe
+
+    sessions:
+      new:
+        title: Connexion utilisateur
+      edit:
+        title: Connexion utilisateur
+
+    me/profiles:
+      edit:
+        title: Mon profil
+
+    admin/dashboards:
+      show:
+        title: Tableau de bord administrateur
+
+    admin/users:
+      index:
+        title: Liste des utilisateurs

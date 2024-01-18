@@ -1,0 +1,33 @@
+en:
+  seo:
+    default:
+      title: Website page title
+      description: Website page description
+
+    homes:
+      show:
+        title: Home
+
+    password_resets:
+      new:
+        title: Reset password
+      edit:
+        title: Reset password
+
+    sessions:
+      new:
+        title: User signin
+      edit:
+        title: User signin
+
+    me/profiles:
+      edit:
+        title: My profile
+
+    admin/dashboards:
+      show:
+        title: Admin dashboard
+
+    admin/users:
+      index:
+        title: Users list

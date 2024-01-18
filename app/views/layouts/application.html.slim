@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    = seo_meta_tags
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+
+    = javascript_importmap_tags
+
+  body
+    = render 'header'
+
+    main.md:container.mx-auto.p-5.lg:pb-16
+      #flash= render 'flash'
+
+      = yield
+
+    = render 'turbo_confirm'

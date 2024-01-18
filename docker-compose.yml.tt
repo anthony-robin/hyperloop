@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  pg_<%= app_name %>:
+    image: postgres:16-alpine
+    shm_size: 1g
+    environment:
+      - POSTGRES_USER=<%= app_name %>
+      - POSTGRES_PASSWORD=<%= app_name %>
+      - POSTGRES_DB=<%= app_name %>_development
+    volumes:
+      - pg_<%= app_name %>:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+
+volumes:
+  pg_<%= app_name %>:

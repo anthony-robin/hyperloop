@@ -1,0 +1,8 @@
+h1.text-3xl.font-medium.my-5 Mon profil
+
+= simple_form_for current_user, url: [:me, :profile] do |f|
+  = f.input :email
+  = f.input :first_name
+  = f.input :last_name
+
+  = f.button :submit

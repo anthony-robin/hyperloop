@@ -1,0 +1,20 @@
+fr:
+  simple_form:
+    "yes": 'Oui'
+    "no": 'Non'
+    required:
+      text: 'requis'
+      mark: '*'
+    error_notification:
+      default_message: "Veuillez vérifier les problèmes suivants:"
+
+    labels:
+      session:
+        email: Email
+        password: Mot de passe
+        remember: Se souvenir de moi
+
+    hints:
+      user:
+        password: Nouveau mot de passe
+        password_confirmation: Confirmation du nouveau mot de passe

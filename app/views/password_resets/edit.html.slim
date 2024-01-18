@@ -1,0 +1,31 @@
+.md:w-3/5.xl:w-1/2.border.rounded-lg.p-5.dark:border-gray-600
+  h2.text-xl.mb-6 Réinitialiser mon mot de passe
+
+  = simple_form_for @user,
+                    url: password_reset_path(@token),
+                    html: { \
+                      class: 'mb-3', \
+                      method: :patch \
+                    } do |f|
+    = f.input :email,
+              as: :string,
+              label_html: { class: 'block mb-2' },
+              input_html: { class: 'w-full cursor-not-allowed !bg-gray-500' },
+              wrapper_html: { class: 'mb-5' },
+              disabled: true
+
+    = f.input :password,
+              label_html: { class: 'block mb-2' },
+              input_html: { class: 'w-full' },
+              wrapper_html: { class: 'mb-5' },
+              autofocus: true,
+              required: true
+
+    = f.input :password_confirmation,
+              label_html: { class: 'block mb-2' },
+              input_html: { class: 'w-full' },
+              wrapper_html: { class: 'mb-5' },
+              required: true
+
+    .flex.justify-center.items-center
+      = f.button :submit, 'Mettre à jour le mot de passe', class: 'bg-green-600 p-2 rounded-lg text-white cursor-pointer'

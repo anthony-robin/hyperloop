@@ -1,0 +1,16 @@
+@import './components/form';
+@import './components/panels';
+@import './components/buttons';
+@import './components/flash';
+@import './plugins/pagy';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #000;
+    --color-secondary: #385dc7;
+  }
+}

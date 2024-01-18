@@ -1,0 +1,31 @@
+/* Pagy pagination style */
+
+.pagy-nav {
+  @apply flex space-x-2 justify-center my-8;
+}
+
+.pagy-nav .page a,
+.pagy-nav .page.active,
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled {
+  @apply block rounded px-3 py-1 text-sm text-black hover:text-secondary-color dark:text-white dark:hover:bg-secondary-color dark:hover:text-white;
+}
+
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled {
+  @apply text-gray-400 cursor-default dark:text-gray-500;
+  &:hover {
+    @apply text-gray-400 bg-gray-200 dark:bg-gray-700 dark:text-white;
+  }
+  &:active {
+    @apply text-gray-400 bg-gray-200 dark:bg-gray-700 dark:text-white;
+  }
+}
+
+.pagy-nav .page.active {
+  @apply text-white cursor-default bg-secondary-color hover:text-white hover:bg-primary-color dark:hover:bg-gray-700 dark:hover:text-white;
+
+  &:active {
+    @apply text-white bg-primary-color;
+  }
+}
