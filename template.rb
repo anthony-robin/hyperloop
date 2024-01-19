@@ -22,6 +22,11 @@ def add_template_repository_to_source_path
   end
 end
 
+say "=============================================================", :green
+say "Hyperloop 🚄 is building a fresh new Rails app for you ✨", :green
+say "It could take while, please be patient...", :green
+say "=============================================================", :green
+
 add_template_repository_to_source_path
 
 copy_file 'Gemfile', force: true
@@ -64,10 +69,10 @@ copy_file '.rubocop.yml'
 copy_file '.rubocop-custom.yml'
 copy_file '.rubocop-disabled.yml'
 
-port = 3000 # ask('What port do you want the app to run ?')
+@port = 3000 # ask('What port do you want the app to run ?')
 
 file '.env', <<~ENV
-  PORT=#{port.presence || 3000}
+  PORT=#{@port.presence || 3000}
 ENV
 
 run 'dotenv -t .env'
@@ -89,8 +94,8 @@ after_bundle do
 
   install_and_configure_simple_form
 
-  generate('action_text:install') if true # yes?('Do you want ActionText ?')
-  rails_command('active_storage:install') if true # yes?('Do you want ActiveStorage ?')
+  generate('action_text:install')
+  rails_command('active_storage:install')
 
   install_and_configure_sorcery
   install_and_configure_action_policy
@@ -122,6 +127,7 @@ after_bundle do
 
   finalize
   initial_commit
+  print_final_instructions
 end
 
 def run_migrations_and_seed_database
@@ -228,4 +234,21 @@ def initial_commit
   git :init
   git add: '.'
   git commit: %Q{ -m 'Initial commit' }
+end
+
+def print_final_instructions
+  say "============================================================="
+  say "Hyperloop 🚄 successfully created your Rails app ! 🎉🎉🎉", :green
+  say
+  say "Switch to your app by running:"
+  say "$ cd #{app_name}", :yellow
+  say
+  say "Then run:"
+  say "$ bin/dev", :yellow
+  say
+  say "Then open:"
+  say "http://localhost:#{@port}", :yellow
+  say
+  say "Database is already filled with default values of db/seeds.rb. Enjoy!"
+  say "============================================================="
 end
