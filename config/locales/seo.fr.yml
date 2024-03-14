@@ -31,3 +31,9 @@ fr:
     admin/users:
       index:
         title: Liste des utilisateurs
+
+      new:
+        title: Ajouter un utilisateur
+
+      edit:
+        title: Modifier un utilisateur

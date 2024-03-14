@@ -10,7 +10,7 @@
 
 @layer base {
   :root {
-    --color-primary: #000;
-    --color-secondary: #385dc7;
+    --primary-color: #385dc7;
+    --secondary-color: #000;
   }
 }

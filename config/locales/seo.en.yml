@@ -31,3 +31,9 @@ en:
     admin/users:
       index:
         title: Users list
+
+      new:
+        title: Add a user
+
+      edit:
+        title: Edit a user

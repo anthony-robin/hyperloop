@@ -1,3 +1,20 @@
-.border.p-2
-  p.text-lg= user.full_name
-  p.italic= user.email
+tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700.hover:bg-gray-50.dark:hover:bg-gray-600
+  th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+    = user.full_name
+
+  td.px-6.py-4
+    = user.email
+
+  td.px-6.py-4
+    = User.human_enum_name(:role, user.role)
+
+  td.flex.items-center.px-6.py-4
+    = link_to 'Modifier',
+              edit_admin_user_path(user),
+              class: 'edit-link'
+
+    = button_to 'Supprimer',
+                admin_user_path(user),
+                method: :delete,
+                data: { turbo_confirm: 'Voulez-vous supprimer cet utilisateur ?' },
+                class: 'destroy-button ms-3'

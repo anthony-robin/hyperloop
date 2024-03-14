@@ -1,1 +1,12 @@
 fr:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        role: Rôle
+        roles:
+          standard: Standard
+          admin: Administrateur
+          super_admin: Super administrateur

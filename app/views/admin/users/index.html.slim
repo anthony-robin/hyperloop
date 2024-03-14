@@ -1,4 +1,21 @@
-h1 Liste des utilisateurs
+header.flex.items-center.justify-between.mb-6.pb-2.border-b-2.border-primary-color
+  h1.text-lg.font-bold Liste des utilisateurs
 
-#users.space-y-3
-  = render @users
+  - if allowed_to?(:create?, User)
+    = link_to 'Ajouter +', new_admin_user_path, class: 'add-link'
+
+== pagy_nav(@pagy) if @pagy.pages > 1
+
+#users.relative.overflow-x-auto.shadow-md.sm:rounded-lg
+  table.w-full.text-sm.text-left.rtl:text-right.text-gray-500.dark:text-gray-400
+    thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
+      tr
+        th.px-6.py-3 scope="col" Nom complet
+        th.px-6.py-3 scope="col" Email
+        th.px-6.py-3 scope="col" Rôle
+        th.px-6.py-3 scope="col" Actions
+
+    tbody
+      = render @users
+
+== pagy_nav(@pagy) if @pagy.pages > 1

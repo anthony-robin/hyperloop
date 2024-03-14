@@ -1,7 +1,7 @@
 /* Buttons */
 
 .base-link {
-  @apply text-white text-sm p-2 rounded-lg dark:bg-transparent dark:hover:text-white transition-colors focus:ring-4 focus:outline-none;
+  @apply text-white text-sm px-2 py-1 rounded-lg dark:bg-transparent dark:hover:text-white transition-colors focus:ring-4 focus:outline-none;
 }
 
 .back-link {
@@ -18,7 +18,7 @@ input.add-link[type="submit"] {
 }
 
 .destroy-button {
-  @apply base-link bg-red-700 hover:bg-red-500 focus:ring-red-600 dark:border dark:border-red-500 dark:text-red-500 dark:hover:bg-red-500;
+  @apply base-link !bg-red-700 hover:!bg-red-500 focus:ring-red-600 dark:border dark:border-red-500 dark:text-red-500 dark:hover:bg-red-500;
 }
 
 .blue-button {

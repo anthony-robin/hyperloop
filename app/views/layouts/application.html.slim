@@ -9,8 +9,10 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
 
     = javascript_importmap_tags
+    = hotwire_livereload_tags if Rails.env.development?
 
   body
+    = ribbonit unless Rails.env.production?
     = render 'header'
 
     main.md:container.mx-auto.p-5.lg:pb-16

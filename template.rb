@@ -29,7 +29,35 @@ say "=============================================================", :green
 
 add_template_repository_to_source_path
 
-copy_file 'Gemfile', force: true
+gem 'action_policy'
+gem 'dotenv-rails'
+gem 'ffaker'
+gem 'meta-tags'
+gem 'pagy'
+gem 'rails-i18n'
+gem 'ribbonit'
+gem 'simple_form'
+gem 'slim-rails'
+gem 'solid_queue', github: 'basecamp/solid_queue'
+gem 'sorcery'
+gem 'tailwindcss-rails'
+
+gem_group :development do
+  gem 'annotate'
+  gem 'brakeman', require: false
+  gem 'bullet'
+  gem 'chusaku', require: false
+  gem 'hotwire-livereload'
+  gem 'letter_opener'
+  gem 'ruby-lsp-rails'
+end
+
+gem_group :development, :test do
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+end
+
 template 'docker-compose.yml.tt'
 
 directory 'app/services'
@@ -46,8 +74,7 @@ copy_file 'app/jobs/callable_job.rb'
 copy_file 'app/mailers/user_mailer.rb'
 
 copy_file 'app/views/application/_flash.html.slim'
-copy_file 'app/views/application/_turbo_confirm.html.slim'
-template 'app/views/application/_header.html.slim.tt'
+directory 'app/views/application'
 directory 'app/views/user_mailer'
 directory 'app/views/sessions'
 directory 'app/views/password_resets'
@@ -60,6 +87,7 @@ directory 'config/routes'
 copy_file 'config/initializers/generators.rb'
 copy_file 'config/initializers/inflections.rb', force: true
 copy_file 'config/initializers/pagy.rb'
+copy_file 'config/initializers/ribbonit.rb'
 copy_file 'config/initializers/sorcery_monkey.rb'
 
 copy_file 'lib/tasks/annotate.rake'
@@ -120,6 +148,7 @@ after_bundle do
 
   directory 'config/locales', force: true
 
+  configure_hotwire_livereload
   add_and_configure_bullet
   create_pretty_confirm
 
@@ -188,12 +217,22 @@ def install_and_configure_sorcery
   updated_content = content.gsub(/add_column :users, :role, :integer/, "add_column :users, :role, :integer, null: false, default: 0")
   File.open(migration_file, "w") { |file| file.puts updated_content }
 
+  copy_file 'app/models/application_record.rb', force: true
   copy_file 'app/models/user.rb', force: true
 end
 
 def install_and_configure_action_policy
   generate('action_policy:install')
   directory 'app/policies', force: true
+end
+
+def configure_hotwire_livereload
+  inject_into_file 'config/environments/development.rb', before: /^end/ do
+    <<~RUBY
+      \n
+      config.hotwire_livereload.reload_method = :turbo_stream
+    RUBY
+  end
 end
 
 def add_and_configure_bullet

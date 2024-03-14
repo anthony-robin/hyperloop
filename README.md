@@ -54,6 +54,9 @@ In development:
 - [letter_opener](https://github.com/ryanb/letter_opener) to intercept emails and print them in browser
 - [ruby-lsp-rails](https://github.com/Shopify/ruby-lsp-rails) to have better rails integration into editor
 - [rubocop](https://github.com/rubocop/rubocop) and its extensions for coding conventions (very opinionated)
+- [ribbonit](https://github.com/anthony-robin/ribbonit) to display Ruby and Rails informations
+- [ruby-lsp-rails](https://github.com/Shopify/ruby-lsp-rails) to improve rich features in editors
+- [hotwire-livereload](https://github.com/kirillplatonov/hotwire-livereload) to reload browser page on save
 
 ### Frontend
 

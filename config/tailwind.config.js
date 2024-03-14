@@ -14,8 +14,8 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        'primary-color': 'var(--color-primary)',
-        'secondary-color': 'var(--color-secondary)'
+        'primary-color': 'var(--primary-color)',
+        'secondary-color': 'var(--secondary-color)'
       },
     },
   },

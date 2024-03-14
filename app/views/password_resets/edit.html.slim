@@ -1,6 +1,4 @@
-.md:w-3/5.xl:w-1/2.border.rounded-lg.p-5.dark:border-gray-600
-  h2.text-xl.mb-6 Réinitialiser mon mot de passe
-
+= render 'session_box', title: 'Réinitialiser mon mot de passe' do
   = simple_form_for @user,
                     url: password_reset_path(@token),
                     html: { \

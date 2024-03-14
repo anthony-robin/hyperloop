@@ -4,24 +4,28 @@
 / @see https://github.com/themesberg/flowbite/issues/698#issuecomment-1811847462
 div drawer-backdrop=""
 
-button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="absolute top-2 right-2 p-2 text-sm bg-teal-500 text-white rounded-lg sm:hidden hover:bg-white hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white focus:text-teal-500 transition-colors z-50"
+button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="absolute top-2 right-2 p-2 text-sm bg-primary-color text-white rounded-lg sm:hidden hover:bg-white hover:text-primary-color focus:outline-none focus:ring-2 focus:ring-primary-color focus:bg-white focus:text-primary-color transition-colors z-50 border border-primary-color"
   span class="sr-only" Open sidebar
   svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
     path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
 
-aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-black text-white border-r-4 border-teal-500" aria-label="Sidebar"
-  .h-full.px-3.py-4.overflow-y-auto.py-5
-    = link_to admin_dashboard_path, class: 'block text-white transition-colors hover:text-teal-500 mb-3' do
-      | <%= camelized %>
+aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-black text-white border-r-4 border-primary-color" aria-label="Sidebar"
+  .flex.flex-col.justify-between.h-full.px-3.py-4
+    .h-full.px-3.py-4.overflow-y-auto.py-5
+      = link_to admin_dashboard_path, class: 'block text-white transition-colors hover:text-primary-color mb-3' do
+        | <%= camelized %>
 
-    hr.border-gray-400.mb-3
+      hr.border-gray-400.mb-3
 
-    nav
-      = link_to admin_users_path, class: "flex items-center gap-2 px-2 py-1 hover:bg-zinc-800 rounded-lg transition-colors #{'bg-zinc-800 text-teal-500' if controller_path == 'admin/users'}" do
-        | Les utilisateurs
+      nav.space-y-3
+        = link_to admin_dashboard_path, class: "flex items-center gap-2 p-2 hover:bg-primary-color rounded-lg transition-colors #{'bg-primary-color text-white' if controller_path == 'admin/dashboards'}" do
+          | Tableau de bord
+
+        = link_to admin_users_path, class: "flex items-center gap-2 p-2 hover:bg-primary-color rounded-lg transition-colors #{'bg-primary-color text-white' if controller_path == 'admin/users'}" do
+          | Les utilisateurs
 
     / User account dropdown
-    button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center justify-center w-full p-2 mt-7 mb-12 md:mb-0 text-sm font-medium text-white rounded-full hover:text-teal-500 ring-1 ring-teal-500 focus:ring-2" type="button"
+    button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center justify-center w-full p-2 mt-7 mb-12 md:mb-0 text-sm font-medium text-white rounded-full hover:text-primary-color ring-1 ring-primary-color focus:ring-2" type="button"
       span.sr-only Open user menu
       - if current_user.avatar.attached?
         = image_tag current_user.avatar, class: 'w-8 h-8 me-2 object-cover rounded-full'
