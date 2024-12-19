@@ -1,16 +1,21 @@
-@import './components/form';
-@import './components/panels';
-@import './components/buttons';
-@import './components/flash';
-@import './plugins/pagy';
+@import "./components/form";
+@import "./components/panels";
+@import "./components/buttons";
+@import "./components/flash";
+@import "./plugins/pagy";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --primary-color: #385dc7;
-    --secondary-color: #000;
-  }
+    :root {
+        --primary-color: #385dc7;
+        --secondary-color: #000;
+    }
+}
+
+.turbo-progress-bar {
+    height: 5px;
+    background-color: var(--color-secondary);
 }

@@ -9,22 +9,26 @@ module SEOHelper
                       prev: pagy ? pagy_prev_url(pagy) : nil,
                       next: pagy ? pagy_next_url(pagy) : nil,
                       image_src: asset_url('/logo.png'),
-                      og: { \
+                      og: {
                         title: :title,
                         site_name: :site,
                         description: :description,
                         image: asset_url('/logo.png'),
                         url: request.url
                       },
-                      twitter: { \
+                      twitter: {
                         card: 'summary',
                         title: :title,
                         description: :description,
                         image: asset_url('/logo.png'),
                         url: request.url
                       },
-                      icon: [{ href: '/favicon.ico', type: 'image/ico' }],
                       viewport: 'width=device-width,initial-scale=1',
+                      icon: [
+                        { href: '/icon.png', type: 'image/png' },
+                        { href: '/icon.svg', type: 'image/svg+xml' }
+                      ],
+                      'apple-touch-icon': '/icon.png',
                       'turbo-cache-control': 'no-preview',
                       'original-page-title': title_for_page
   end
