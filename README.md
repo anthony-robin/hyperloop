@@ -1,6 +1,6 @@
 # Hyperloop 🚄
 
-Speed up your new Rails 7.1 projects with a preconfigured set of tools !
+Speed up your new Rails 8.0 projects with a preconfigured set of tools !
 
 > [!NOTE]
 > This template has been built to match as best as possible default changes I make on every new Rails project I work on. It is very opinionated for some configuration so feel free to fork it and adapt it according to your needs.
@@ -31,11 +31,9 @@ $ bin/dev
 
 In production:
 
-- [sqlite3](https://github.com/sparklemotion/sqlite3-ruby) adapter by default and [pg](https://github.com/ged/ruby-pg) available with a quick change in `database.yml`
 - [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for javascript related features
 - [slim-rails](https://github.com/slim-template/slim-rails) for views templates
 - [tailwindcss-rails](https://github.com/rails/tailwindcss-rails) as frontend framework
-- [solid_queue](https://github.com/basecamp/solid_queue) as production job adapter
 - [sorcery](https://github.com/Sorcery/sorcery) as authentication
 - [simple_form](https://github.com/heartcombo/simple_form/) for handling forms inputs
 - [pagy](https://github.com/ddnexus/pagy) for pagination
@@ -44,14 +42,14 @@ In production:
 - [dotenv-rails](https://github.com/bkeepers/dotenv) to handle `.env` files
 - [activestorage](https://github.com/rails/rails/tree/main/activestorage) and [actiontext](https://github.com/rails/rails/tree/main/actiontext) available by default
 - [ffaker](https://github.com/ffaker/ffaker) to generate fake data (seed database)
+- [mission_control-jobs](https://github.com/rails/mission_control-jobs) to manage processed jobs
 
 In development:
 
-- [annotate](https://github.com/ctran/annotate_models) to print model database structure (opinionated configuration)
-- [brakeman](https://github.com/presidentbeef/brakeman) to check for security vulnerability in code
+- [annotaterb](https://github.com/drwl/annotaterb) to print model database structure (opinionated configuration)
 - [bullet](https://github.com/flyerhzm/bullet) to track N+1 queries
 - [chusaku](https://github.com/nshki/chusaku) to print routes URL above controller actions
-- [letter_opener](https://github.com/ryanb/letter_opener) to intercept emails and print them in browser
+- [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to intercept emails and print them in browser
 - [ruby-lsp-rails](https://github.com/Shopify/ruby-lsp-rails) to have better rails integration into editor
 - [rubocop](https://github.com/rubocop/rubocop) and its extensions for coding conventions (very opinionated)
 - [ribbonit](https://github.com/anthony-robin/ribbonit) to display Ruby and Rails informations
@@ -61,7 +59,7 @@ In development:
 ### Frontend
 
 - [TailwindCSS](https://tailwindcss.com/)
-- [Flowbite](https://flowbite.com/) for responsive navbar and sidebar 
+- [Flowbite](https://flowbite.com/) for responsive navbar and sidebar
 
 ### Features
 

@@ -33,22 +33,21 @@ gem 'action_policy'
 gem 'dotenv-rails'
 gem 'ffaker'
 gem 'meta-tags'
+gem 'mission_control-jobs'
 gem 'pagy'
 gem 'rails-i18n'
 gem 'ribbonit'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'solid_queue', github: 'basecamp/solid_queue'
 gem 'sorcery'
 gem 'tailwindcss-rails'
 
 gem_group :development do
-  gem 'annotate'
-  gem 'brakeman', require: false
+  gem 'annotaterb'
   gem 'bullet'
   gem 'chusaku', require: false
   gem 'hotwire-livereload'
-  gem 'letter_opener'
+  gem 'letter_opener_web'
   gem 'ruby-lsp-rails'
 end
 
@@ -81,26 +80,30 @@ directory 'app/views/password_resets'
 directory 'app/views/me'
 directory 'app/views/admin'
 
-template 'config/database.yml.tt', force: true
 copy_file 'config/routes.rb', force: true
 directory 'config/routes'
 copy_file 'config/initializers/generators.rb'
 copy_file 'config/initializers/inflections.rb', force: true
 copy_file 'config/initializers/pagy.rb'
 copy_file 'config/initializers/ribbonit.rb'
-copy_file 'config/initializers/sorcery_monkey.rb'
 
-copy_file 'lib/tasks/annotate.rake'
+copy_file 'lib/tasks/annotaterb.rake'
+copy_file '.annotaterb.yml'
 
-copy_file 'bin/rubocop'
-copy_file '.rubocop.yml'
+copy_file '.rubocop.yml', force: true
 copy_file '.rubocop-custom.yml'
 copy_file '.rubocop-disabled.yml'
+gsub_file 'Gemfile', '# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]', ''
+gsub_file 'Gemfile', 'gem "rubocop-rails-omakase", require: false', ''
+gsub_file 'config/environments/development.rb',
+          '# config.generators.apply_rubocop_autocorrect_after_generate!',
+          'config.generators.apply_rubocop_autocorrect_after_generate!'
 
 @port = 3000 # ask('What port do you want the app to run ?')
 
 file '.env', <<~ENV
   PORT=#{@port.presence || 3000}
+  # SOLID_QUEUE_IN_PUMA="true"
 ENV
 
 run 'dotenv -t .env'
@@ -129,7 +132,7 @@ after_bundle do
   install_and_configure_action_policy
   install_and_configure_tailwindcss
 
-  generate('solid_queue:install')
+  copy_file 'config/initializers/mission_control.rb'
 
   generate(:controller, 'homes', 'show', '--skip-routes')
   run 'bundle exec chusaku'
@@ -139,7 +142,7 @@ after_bundle do
       config.action_mailer.default_url_options = {
         host: 'http://localhost', port: ENV.fetch('PORT', 3000)
       }
-      config.action_mailer.delivery_method = :letter_opener
+      config.action_mailer.delivery_method = :letter_opener_web
       config.action_mailer.perform_deliveries = true
     RUBY
   end
@@ -175,7 +178,6 @@ def finalize
     GITIGNORE
   end
 
-  remove_file 'config/initializers/sorcery_monkey.rb'
   remove_file 'app/views/layouts/application.html.erb'
 
   run 'rm -r test'
@@ -195,7 +197,7 @@ def install_and_configure_tailwindcss
 
   inject_into_file 'app/javascript/application.js' do
     <<~JAVASCRIPT
-    import 'flowbite'
+      import 'flowbite'
     JAVASCRIPT
   end
 end

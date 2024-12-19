@@ -9,9 +9,12 @@ require:
 AllCops:
   SuggestExtensions: false
   Exclude:
-    - 'db/schema.rb'
-    - 'vendor/**/*'
-    - 'tmp/**/*'
+    - "bin/*"
+    - "db/*schema.rb"
+    - "lib/generators/**/*"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
 
 Rails/I18nLocaleTexts:
   Enabled: false
