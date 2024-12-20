@@ -45,7 +45,7 @@ gem_group :development do
   gem 'annotaterb'
   gem 'bullet'
   gem 'chusaku', require: false
-  gem 'hotwire-livereload'
+  gem 'hotwire-spark'
   gem 'letter_opener_web'
 end
 
@@ -153,7 +153,6 @@ after_bundle do
 
   directory 'config/locales', force: true
 
-  configure_hotwire_livereload
   add_and_configure_bullet
   create_pretty_confirm
 
@@ -227,15 +226,6 @@ end
 def install_and_configure_action_policy
   generate('action_policy:install')
   directory 'app/policies', force: true
-end
-
-def configure_hotwire_livereload
-  inject_into_file 'config/environments/development.rb', before: /^end/ do
-    <<~RUBY
-      \n
-      config.hotwire_livereload.reload_method = :turbo_stream
-    RUBY
-  end
 end
 
 def add_and_configure_bullet

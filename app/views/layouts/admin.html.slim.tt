@@ -13,7 +13,6 @@ html
     = stylesheet_link_tag 'ribbon' if Rails.env.development?
 
     = javascript_importmap_tags
-    = hotwire_livereload_tags if Rails.env.development?
 
   body
     = ribbonit unless Rails.env.production?
