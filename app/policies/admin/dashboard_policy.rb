@@ -1,6 +1,6 @@
 module Admin
   class DashboardPolicy < ApplicationPolicy
-    pre_check :admin_up?
+    pre_check :allow_admins
 
     def show?
       true

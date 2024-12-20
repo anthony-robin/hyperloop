@@ -1,6 +1,6 @@
 module Admin
   class UserPolicy < ApplicationPolicy
-    pre_check :admin_up?
+    pre_check :allow_admins
 
     def index?
       true
@@ -23,11 +23,15 @@ module Admin
     end
 
     def update?
-      true
+      return true if user.super_admin?
+      return false if user.admin? && record.admin? && record != user
+      return true if user.admin? && !record.super_admin?
+
+      false
     end
 
     def destroy?
-      true
+      update?
     end
   end
 end
