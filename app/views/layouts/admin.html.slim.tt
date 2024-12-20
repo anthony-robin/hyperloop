@@ -5,17 +5,21 @@ html
     = csrf_meta_tags
     = csp_meta_tag
 
+    <%- if options[:css] == 'tailwind' -%>
     = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
+    <%- end -%>
+
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = stylesheet_link_tag 'ribbon' if Rails.env.development?
 
     = javascript_importmap_tags
     = hotwire_livereload_tags if Rails.env.development?
 
-  body.bg-primary-color
+  body
     = ribbonit unless Rails.env.production?
+    = render 'admin/sidebar'
 
-    main.flex.flex-col.items-center.justify-center.p-5.h-screen
+    main.p-5.h-screen.sm:ml-64.md:ml-72
       #flash= render 'flash'
 
       = yield
