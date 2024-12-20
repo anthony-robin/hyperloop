@@ -193,7 +193,7 @@ def install_and_configure_tailwindcss
 
   inject_into_file 'config/importmap.rb' do
     <<-RUBY
-      pin 'flowbite', to: 'https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.turbo.min.js'
+      pin 'flowbite', to: 'https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.5.2/flowbite.turbo.min.js'
     RUBY
   end
 
