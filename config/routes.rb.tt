@@ -13,12 +13,16 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   get 'manifest' => 'rails/pwa#manifest', as: :pwa_manifest
   get 'service-worker' => 'rails/pwa#service_worker', as: :pwa_service_worker
+  <%- if @authentication -%>
 
   get '/sessions', to: redirect('/sessions/new')
-
-  resource :sessions, only: %i[new create destroy]
-  resources :password_resets, only: %i[new create edit update]
+  resource :session, only: %i[new create destroy]
+  resource :registration, only: %i[new create]
+  <%- unless options.skip_action_mailer? -%>
+  resources :passwords, param: :token, only: %i[new create edit update]
+  <%- end -%>
 
   draw :me
   draw :admin
+  <%- end -%>
 end

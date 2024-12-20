@@ -7,8 +7,9 @@ fr:
     homes:
       show:
         title: Accueil
+    <%- if @authentication -%>
 
-    password_resets:
+    passwords:
       new:
         title: Réinitialisation du mot de passe
       edit:
@@ -37,3 +38,4 @@ fr:
 
       edit:
         title: Modifier un utilisateur
+    <%- end -%>

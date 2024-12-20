@@ -1,0 +1,16 @@
+= render 'session_box', title: 'Réinitialiser mon mot de passe' do
+  = simple_form_for '',
+                    url: passwords_path,
+                    html: { class: 'space-y-5' } do |f|
+    = f.input :email_address,
+              required: true,
+              autofocus: true,
+              autocomplete: "username",
+              input_html: { value: params[:email_address] }
+
+    .flex.justify-end
+      = f.button :submit, "Email reset instructions"
+
+  .text-sm.text-gray-500.text-center.mt-6
+    = link_to new_session_path, class: 'text-gray-700 underline' do
+      | J'ai retrouvé mon mot de passe, je me connecte !

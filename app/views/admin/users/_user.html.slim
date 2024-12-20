@@ -3,7 +3,7 @@ tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700.hover:bg-gray-50.dark
     = user.full_name
 
   td.px-6.py-4
-    = user.email
+    = user.email_address
 
   td.px-6.py-4
     = User.human_enum_name(:role, user.role)

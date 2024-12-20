@@ -1,0 +1,19 @@
+fr:
+  activerecord:
+    <%- if @authentication -%>
+
+    models:
+      user: utilisateur
+    attributes:
+      user:
+        first_name: Prénom
+        last_name: Nom
+        email: Email
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        role: Rôle
+        roles:
+          standard: Standard
+          admin: Administrateur
+          super_admin: Super administrateur
+    <%- end -%>

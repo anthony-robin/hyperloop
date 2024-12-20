@@ -7,14 +7,21 @@ fr:
       mark: '*'
     error_notification:
       default_message: "Veuillez vérifier les problèmes suivants:"
+    <%- if @authentication -%>
 
     labels:
-      session:
-        email: Email
+      defaults:
+        email_address: Email
         password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
         remember: Se souvenir de moi
 
     hints:
       user:
         password: Nouveau mot de passe
         password_confirmation: Confirmation du nouveau mot de passe
+
+    placeholders:
+      defaults:
+        email_address: john@doe.com
+    <%- end -%>

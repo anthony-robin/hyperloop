@@ -34,7 +34,6 @@ In production:
 - [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for javascript related features
 - [slim-rails](https://github.com/slim-template/slim-rails) for views templates
 - [tailwindcss-rails](https://github.com/rails/tailwindcss-rails) as frontend framework
-- [sorcery](https://github.com/Sorcery/sorcery) as authentication
 - [simple_form](https://github.com/heartcombo/simple_form/) for handling forms inputs
 - [pagy](https://github.com/ddnexus/pagy) for pagination
 - [meta-tags](https://github.com/kpumuk/meta-tags) for SEO friendly
@@ -63,7 +62,7 @@ In development:
 
 ### Features
 
-- Sorcery comes with `session`, `registration` and `reset password` features preconfigured as well as related mailers.
+- Rails authentication comes with `session`, `registration` and `reset password` features preconfigured as well as related mailers.
 - SEO is preconfigured to work in any pages by default and title/description can be specified directly in `seo.{locale}.yml` file.
 - Default browser confirm modal as been replaced with a pretty and friendly one following excellent [gorails tutorial](https://gorails.com/episodes/custom-hotwire-turbo-confirm-modals)
 - Database is seed with default users corresponding to each access level

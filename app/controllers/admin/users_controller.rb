@@ -69,7 +69,7 @@ module Admin
 
     def user_params
       params.require(:user).permit(
-        :first_name, :last_name, :email,
+        :first_name, :last_name, :email_address,
         :password, :password_confirmation
       )
     end

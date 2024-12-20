@@ -3,18 +3,19 @@ class ApplicationController < ActionController::Base
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
-
-  before_action :require_login
+  <%- if @authentication -%>
 
   rescue_from ActionPolicy::Unauthorized, with: :unauthorized_access
+  <%- end -%>
 
   add_flash_types :warning, :info
+  <%- if @authentication -%>
+  helper_method :current_user
 
   private
 
-  def not_authenticated
-    redirect_to new_sessions_path,
-                alert: 'Vous devez être authentifié pour accéder à cette page'
+  def current_user
+    @current_user ||= Current.user
   end
 
   def unauthorized_access(e)
@@ -23,4 +24,5 @@ class ApplicationController < ActionController::Base
 
     redirect_back_or_to root_path, alert: message
   end
+  <%- end -%>
 end

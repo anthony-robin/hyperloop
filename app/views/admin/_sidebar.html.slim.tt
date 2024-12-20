@@ -4,12 +4,12 @@
 / @see https://github.com/themesberg/flowbite/issues/698#issuecomment-1811847462
 div drawer-backdrop=""
 
-button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="absolute top-2 right-2 p-2 text-sm bg-primary-color text-white rounded-lg sm:hidden hover:bg-white hover:text-primary-color focus:outline-none focus:ring-2 focus:ring-primary-color focus:bg-white focus:text-primary-color transition-colors z-50 border border-primary-color"
-  span class="sr-only" Open sidebar
-  svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+button.absolute.top-2.right-2.p-2.text-sm.bg-primary-color.text-white.rounded-lg.sm:hidden.hover:bg-white.hover:text-primary-color.focus:outline-none.focus:ring-2.focus:ring-primary-color.focus:bg-white.focus:text-primary-color.transition-colors.z-50.border.border-primary-color data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button"
+  span.sr-only Open sidebar
+  svg.w-6.h-6 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
     path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
 
-aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-black text-white border-r-4 border-primary-color" aria-label="Sidebar"
+aside.fixed.top-0.left-0.z-40.w-64.md:w-72.h-screen.transition-transform.-translate-x-full.sm:translate-x-0.bg-black.text-white.border-r-4.border-primary-color id="logo-sidebar" aria-label="Sidebar"
   .flex.flex-col.justify-between.h-full.px-3.py-4
     .h-full.px-3.py-4.overflow-y-auto.py-5
       = link_to admin_dashboard_path, class: 'block text-white transition-colors hover:text-primary-color mb-3' do
@@ -25,26 +25,23 @@ aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen tra
           | Les utilisateurs
 
     / User account dropdown
-    button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center justify-center w-full p-2 mt-7 mb-12 md:mb-0 text-sm font-medium text-white rounded-full hover:text-primary-color ring-1 ring-primary-color focus:ring-2" type="button"
+    button.flex.items-center.justify-center.w-full.p-2.mt-7.mb-12.md:mb-0.text-sm.font-medium.text-white.rounded-full.hover:text-primary-color.ring-1.ring-primary-color.focus:ring-2 id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" type="button"
       span.sr-only Open user menu
-      <%- if options.skip_active_storage? -%>
-
-      = current_user.email
-      <%- else -%>
+      <%- unless options.skip_active_storage? -%>
 
       - if current_user.avatar.attached?
         = image_tag current_user.avatar, class: 'w-8 h-8 me-2 object-cover rounded-full'
-      = current_user.email
       <%- end -%>
+      = current_user.email_address
 
       svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"
         path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"
 
-    <!-- Dropdown menu -->
+    / Dropdown menu
     #dropdownAvatarName.z-10.hidden.divide-y.rounded-lg.shadow.w-56.bg-gray-700.divide-gray-600
       .px-4.py-3.text-sm.text-white
         .font-medium= current_user.full_name
-        .truncate= current_user.email
+        .truncate= current_user.email_address
 
       ul.py-2.text-sm.text-gray-200 aria-labelledby="dropdownAvatarNameButton"
         li
@@ -55,6 +52,6 @@ aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen tra
 
       .py-2
         = link_to 'Déconnexion',
-                  sessions_path,
+                  session_path,
                   data: { turbo_method: :delete },
                   class: 'block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white'

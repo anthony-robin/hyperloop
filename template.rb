@@ -27,6 +27,8 @@ say "Hyperloop 🚄 is building a fresh new Rails app for you ✨", :green
 say "It could take while, please be patient...", :green
 say "=============================================================", :green
 
+@authentication = yes?('Do you want authentication ? (Y/n)')
+
 add_template_repository_to_source_path
 
 gem 'action_policy'
@@ -40,7 +42,6 @@ gem 'rails-i18n'
 gem 'ribbonit'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'sorcery'
 
 gem_group :development do
   gem 'annotaterb'
@@ -72,25 +73,14 @@ if options[:database] == 'postgresql' && !options.skip_docker?
 end
 
 directory 'app/services'
-copy_file 'app/controllers/application_controller.rb', force: true
-copy_file 'app/controllers/sessions_controller.rb'
-copy_file 'app/controllers/password_resets_controller.rb'
-directory 'app/controllers/me'
-directory 'app/controllers/admin'
+template 'app/controllers/application_controller.rb.tt', force: true
 
 template 'app/helpers/application_helper.rb', force: true
-template 'app/helpers/seo_helper.rb.tt'
 
 copy_file 'app/jobs/callable_job.rb'
-copy_file 'app/mailers/user_mailer.rb' unless options.skip_action_mailer?
+copy_file 'app/models/application_record.rb', force: true
 
-copy_file 'app/views/application/_flash.html.slim'
 directory 'app/views/application'
-directory 'app/views/user_mailer' unless options.skip_action_mailer?
-directory 'app/views/sessions'
-directory 'app/views/password_resets'
-directory 'app/views/me'
-directory 'app/views/admin'
 
 template 'config/routes.rb.tt', force: true
 directory 'config/routes'
@@ -128,14 +118,17 @@ after_bundle do
     RUBY
   end
 
+  if @authentication
+    install_and_configure_authentication
+    install_and_configure_action_policy
+  end
+
   generate('action_text:install') unless options.skip_action_text?
   rails_command('active_storage:install') unless options.skip_active_storage?
 
-  install_and_configure_sorcery
-  install_and_configure_action_policy
   install_and_configure_tailwindcss if options[:css] == "tailwind"
 
-  copy_file 'config/initializers/mission_control.rb'
+  template 'config/initializers/mission_control.rb.tt'
 
   generate(:controller, 'homes', 'show', '--skip-routes')
   run 'bundle exec chusaku'
@@ -152,10 +145,14 @@ after_bundle do
     end
   end
 
-  gsub_file 'config/initializers/sorcery.rb', "# user.reset_password_mailer =", "user.reset_password_mailer = UserMailer"
+  copy_file 'config/locales/fr.yml', force: true
 
-  directory 'config/locales', force: true
+  if @authentication
+    copy_file 'config/locales/activerecord.en.yml'
+    template 'config/locales/activerecord.fr.yml'
+  end
 
+  setup_seo_module
   add_and_configure_bullet
   create_pretty_confirm
 
@@ -198,28 +195,74 @@ end
 
 def install_and_configure_simple_form
   generate('simple_form:install')
-  gsub_file 'config/initializers/simple_form.rb', "config.button_class = 'btn'", "config.button_class = 'add-link cursor-pointer'"
-  gsub_file 'config/initializers/simple_form.rb', '# config.label_class = nil', "config.label_class = 'inline-block'"
+  gsub_file 'config/initializers/simple_form.rb', "config.button_class = 'btn'", "config.button_class = 'button'"
+  gsub_file 'config/initializers/simple_form.rb', '# config.label_class = nil', "config.label_class = 'block'"
   gsub_file 'config/initializers/simple_form.rb', '# config.input_class = nil', "config.input_class = 'w-full'"
+
+  template 'config/locales/simple_form.en.yml', force: true
+  template 'config/locales/simple_form.fr.yml'
 end
 
-def install_and_configure_sorcery
-  generate('sorcery:install remember_me reset_password --model User')
+def install_and_configure_authentication
+  generate('authentication')
   generate('migration add_fields_to_user first_name:string last_name:string role:integer')
 
-  # Update migration null and default value
+  # Update migration null and default value for role
   migration_file = Dir.glob("db/migrate/*add_fields_to_user.rb").first
   content = File.read(migration_file)
   updated_content = content.gsub(/add_column :users, :role, :integer/, "add_column :users, :role, :integer, null: false, default: 0")
   File.open(migration_file, "w") { |file| file.puts updated_content }
 
-  copy_file 'app/models/application_record.rb', force: true
+  copy_file 'app/controllers/registrations_controller.rb'
+  directory 'app/controllers/me'
+  directory 'app/controllers/admin'
   template 'app/models/user.rb.tt', force: true
+
+  # Views not generated in slim :(
+  directory 'app/views/registrations'
+  directory 'app/views/sessions', force: true
+  directory 'app/views/passwords', force: true unless options.skip_action_mailer?
+
+  directory 'app/views/me'
+  directory 'app/views/admin'
+
+  inject_into_file 'app/controllers/sessions_controller.rb',
+    after: 'class SessionsController < ApplicationController' do
+    <<-RUBY
+      \n
+      layout 'session'
+    RUBY
+  end
+
+  inject_into_file 'app/controllers/passwords_controller.rb',
+    after: 'class PasswordsController < ApplicationController' do
+    <<-RUBY
+      \n
+      layout 'session'
+    RUBY
+  end
+
+  inject_into_file 'app/controllers/registrations_controller.rb',
+    after: 'class RegistrationsController < ApplicationController' do
+    <<-RUBY
+      \n
+      layout 'session'
+    RUBY
+  end
 end
 
 def install_and_configure_action_policy
   generate('action_policy:install')
   directory 'app/policies', force: true
+
+  copy_file 'config/locales/action_policy.en.yml'
+  copy_file 'config/locales/action_policy.fr.yml'
+end
+
+def setup_seo_module
+  template 'app/helpers/seo_helper.rb.tt'
+  template 'config/locales/seo.en.yml'
+  template 'config/locales/seo.fr.yml'
 end
 
 def add_and_configure_bullet
