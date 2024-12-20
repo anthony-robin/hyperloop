@@ -47,7 +47,6 @@ gem_group :development do
   gem 'chusaku', require: false
   gem 'hotwire-livereload'
   gem 'letter_opener_web'
-  gem 'ruby-lsp-rails'
 end
 
 unless options.skip_rubocop?
