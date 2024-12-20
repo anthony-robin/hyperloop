@@ -4,24 +4,21 @@ html
     = seo_meta_tags
     = csrf_meta_tags
     = csp_meta_tag
-
-    = yield :head
-
-    / Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!)
-    = tag.link rel: "manifest", href: pwa_manifest_path(format: :json)
+    <%- if options[:css] == 'tailwind' -%>
 
     = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
+    <%- end -%>
+
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = stylesheet_link_tag 'ribbon' if Rails.env.development?
 
     = javascript_importmap_tags
     = hotwire_livereload_tags if Rails.env.development?
 
-  body
+  body.bg-primary-color
     = ribbonit unless Rails.env.production?
-    = render 'header'
 
-    main.md:container.mx-auto.p-5.lg:pb-16
+    main.flex.flex-col.items-center.justify-center.p-5.h-screen
       #flash= render 'flash'
 
       = yield

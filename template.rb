@@ -40,7 +40,6 @@ gem 'ribbonit'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'sorcery'
-gem 'tailwindcss-rails'
 
 gem_group :development do
   gem 'annotaterb'
@@ -51,13 +50,26 @@ gem_group :development do
   gem 'ruby-lsp-rails'
 end
 
-gem_group :development, :test do
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
+unless options.skip_rubocop?
+  gem_group :development, :test do
+    gem 'rubocop'
+    gem 'rubocop-performance'
+    gem 'rubocop-rails'
+  end
+
+  copy_file '.rubocop.yml', force: true
+  copy_file '.rubocop-custom.yml'
+  copy_file '.rubocop-disabled.yml'
+  gsub_file 'Gemfile', '# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]', ''
+  gsub_file 'Gemfile', 'gem "rubocop-rails-omakase", require: false', ''
+  gsub_file 'config/environments/development.rb',
+            '# config.generators.apply_rubocop_autocorrect_after_generate!',
+            'config.generators.apply_rubocop_autocorrect_after_generate!'
 end
 
-template 'docker-compose.yml.tt'
+if options[:database] == 'postgresql'
+  template 'docker-compose.yml.tt'
+end
 
 directory 'app/services'
 copy_file 'app/controllers/application_controller.rb', force: true
@@ -90,15 +102,6 @@ copy_file 'config/initializers/ribbonit.rb'
 copy_file 'lib/tasks/annotaterb.rake'
 copy_file '.annotaterb.yml'
 
-copy_file '.rubocop.yml', force: true
-copy_file '.rubocop-custom.yml'
-copy_file '.rubocop-disabled.yml'
-gsub_file 'Gemfile', '# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]', ''
-gsub_file 'Gemfile', 'gem "rubocop-rails-omakase", require: false', ''
-gsub_file 'config/environments/development.rb',
-          '# config.generators.apply_rubocop_autocorrect_after_generate!',
-          'config.generators.apply_rubocop_autocorrect_after_generate!'
-
 @port = 3000 # ask('What port do you want the app to run ?')
 
 file '.env', <<~ENV
@@ -109,9 +112,11 @@ ENV
 run 'dotenv -t .env'
 
 after_bundle do
-  copy_file 'app/views/layouts/session.html.slim'
-  copy_file 'app/views/layouts/application.html.slim'
-  copy_file 'app/views/layouts/admin.html.slim'
+  install_and_configure_simple_form
+
+  template 'app/views/layouts/application.html.slim.tt'
+  template 'app/views/layouts/session.html.slim.tt'
+  template 'app/views/layouts/admin.html.slim.tt'
 
   gsub_file 'config/application.rb', /# config.time_zone = .+/, "config.time_zone = 'Europe/Paris'"
 
@@ -123,14 +128,12 @@ after_bundle do
     RUBY
   end
 
-  install_and_configure_simple_form
-
   generate('action_text:install')
   rails_command('active_storage:install')
 
   install_and_configure_sorcery
   install_and_configure_action_policy
-  install_and_configure_tailwindcss
+  install_and_configure_tailwindcss if options[:css] == "tailwind"
 
   copy_file 'config/initializers/mission_control.rb'
 
@@ -181,11 +184,10 @@ def finalize
   remove_file 'app/views/layouts/application.html.erb'
 
   run 'rm -r test'
-  run 'bundle exec rubocop -A --fail-level=E'
+  run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 end
 
 def install_and_configure_tailwindcss
-  rails_command('tailwindcss:install')
   directory 'app/assets/stylesheets', force: true
   copy_file 'config/tailwind.config.js', force: true
 
