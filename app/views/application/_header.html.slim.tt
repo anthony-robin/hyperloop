@@ -6,10 +6,16 @@ nav class="bg-white border-b border-gray-200"
     div class="flex items-center md:order-2 space-x-3 rtl:space-x-reverse"
       button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 ring-4 ring-gray-700 focus:ring-secondary-color" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom"
         <span class="sr-only">Open user menu</span>
+        <%- if options.skip_active_storage? -%>
+
+          p Menu
+        <%- else -%>
+
         - if current_user.avatar.attached?
           = image_tag polymorphic_path(current_user.avatar), class: 'w-10 h-10 object-cover rounded-full'
         - else
           p Menu
+        <%- end -%>
 
       <!-- Dropdown menu -->
       div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown"

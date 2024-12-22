@@ -27,9 +27,16 @@ aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen tra
     / User account dropdown
     button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center justify-center w-full p-2 mt-7 mb-12 md:mb-0 text-sm font-medium text-white rounded-full hover:text-primary-color ring-1 ring-primary-color focus:ring-2" type="button"
       span.sr-only Open user menu
+      <%- if options.skip_active_storage? -%>
+
+      = current_user.email
+      <%- else -%>
+
       - if current_user.avatar.attached?
         = image_tag current_user.avatar, class: 'w-8 h-8 me-2 object-cover rounded-full'
       = current_user.email
+      <%- end -%>
+
       svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"
         path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"
 
