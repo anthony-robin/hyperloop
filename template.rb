@@ -127,7 +127,7 @@ after_bundle do
     RUBY
   end
 
-  generate('action_text:install')
+  generate('action_text:install') unless options.skip_action_text?
   rails_command('active_storage:install')
 
   install_and_configure_sorcery
