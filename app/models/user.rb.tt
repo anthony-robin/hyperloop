@@ -4,8 +4,10 @@ class User < ApplicationRecord
   enum :role, { standard: 0, admin: 1, super_admin: 2 },
        default: :standard,
        validate: true
+  <%- unless options.skip_active_storage? -%>
 
   has_one_attached :avatar
+  <%- end %>
 
   authenticates_with_sorcery!
 

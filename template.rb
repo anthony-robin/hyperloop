@@ -30,6 +30,7 @@ say "=============================================================", :green
 add_template_repository_to_source_path
 
 gem 'action_policy'
+gem 'active_storage_validations' unless options.skip_active_storage?
 gem 'dotenv-rails'
 gem 'ffaker'
 gem 'meta-tags'
@@ -128,7 +129,7 @@ after_bundle do
   end
 
   generate('action_text:install') unless options.skip_action_text?
-  rails_command('active_storage:install')
+  rails_command('active_storage:install') unless options.skip_active_storage?
 
   install_and_configure_sorcery
   install_and_configure_action_policy
@@ -164,7 +165,7 @@ after_bundle do
 end
 
 def run_migrations_and_seed_database
-  copy_file 'db/seeds.rb', force: true
+  template 'db/seeds.rb.tt', force: true
 
   rails_command('db:migrate')
   rails_command('db:seed')
@@ -219,7 +220,7 @@ def install_and_configure_sorcery
   File.open(migration_file, "w") { |file| file.puts updated_content }
 
   copy_file 'app/models/application_record.rb', force: true
-  copy_file 'app/models/user.rb', force: true
+  template 'app/models/user.rb.tt', force: true
 end
 
 def install_and_configure_action_policy
