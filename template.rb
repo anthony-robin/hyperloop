@@ -181,7 +181,6 @@ def finalize
 
   remove_file 'app/views/layouts/application.html.erb'
 
-  run 'rm -r test'
   run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 end
 
