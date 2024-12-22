@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: '/jobs'
+  <%- unless options.skip_action_mailer? -%>
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  <%- end -%>
 
   root to: 'homes#show'
 

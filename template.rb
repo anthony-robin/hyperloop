@@ -47,7 +47,7 @@ gem_group :development do
   gem 'bullet'
   gem 'chusaku', require: false
   gem 'hotwire-spark'
-  gem 'letter_opener_web'
+  gem 'letter_opener_web' unless options.skip_action_mailer?
 end
 
 unless options.skip_rubocop?
@@ -82,17 +82,17 @@ template 'app/helpers/application_helper.rb', force: true
 template 'app/helpers/seo_helper.rb.tt'
 
 copy_file 'app/jobs/callable_job.rb'
-copy_file 'app/mailers/user_mailer.rb'
+copy_file 'app/mailers/user_mailer.rb' unless options.skip_action_mailer?
 
 copy_file 'app/views/application/_flash.html.slim'
 directory 'app/views/application'
-directory 'app/views/user_mailer'
+directory 'app/views/user_mailer' unless options.skip_action_mailer?
 directory 'app/views/sessions'
 directory 'app/views/password_resets'
 directory 'app/views/me'
 directory 'app/views/admin'
 
-copy_file 'config/routes.rb', force: true
+template 'config/routes.rb.tt', force: true
 directory 'config/routes'
 copy_file 'config/initializers/generators.rb'
 copy_file 'config/initializers/inflections.rb', force: true
@@ -140,14 +140,16 @@ after_bundle do
   generate(:controller, 'homes', 'show', '--skip-routes')
   run 'bundle exec chusaku'
 
-  inject_into_file 'config/environments/development.rb', before: "# Don't care if the mailer can't send." do
-    <<-RUBY
-      config.action_mailer.default_url_options = {
-        host: 'http://localhost', port: ENV.fetch('PORT', 3000)
-      }
-      config.action_mailer.delivery_method = :letter_opener_web
-      config.action_mailer.perform_deliveries = true
-    RUBY
+  unless options.skip_action_mailer?
+    inject_into_file 'config/environments/development.rb', before: "# Don't care if the mailer can't send." do
+      <<-RUBY
+        config.action_mailer.default_url_options = {
+          host: 'http://localhost', port: ENV.fetch('PORT', 3000)
+        }
+        config.action_mailer.delivery_method = :letter_opener_web
+        config.action_mailer.perform_deliveries = true
+      RUBY
+    end
   end
 
   gsub_file 'config/initializers/sorcery.rb', "# user.reset_password_mailer =", "user.reset_password_mailer = UserMailer"
