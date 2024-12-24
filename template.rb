@@ -162,7 +162,7 @@ after_bundle do
   run_migrations_and_seed_database
 
   finalize
-  initial_commit
+  initial_commit unless options.skip_git?
   print_final_instructions
 end
 
@@ -174,14 +174,6 @@ def run_migrations_and_seed_database
 end
 
 def finalize
-  inject_into_file '.gitignore' do
-    <<~GITIGNORE
-
-      !/.env.template
-      .DS_Store
-    GITIGNORE
-  end
-
   remove_file 'app/views/layouts/application.html.erb'
 
   run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
@@ -265,6 +257,14 @@ def create_pretty_confirm
 end
 
 def initial_commit
+  inject_into_file '.gitignore' do
+    <<~GITIGNORE
+
+      !/.env.template
+      .DS_Store
+    GITIGNORE
+  end
+
   git :init
   git add: '.'
   git commit: %Q{ -m 'Initial commit' }
