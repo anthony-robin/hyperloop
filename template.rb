@@ -67,7 +67,7 @@ unless options.skip_rubocop?
             'config.generators.apply_rubocop_autocorrect_after_generate!'
 end
 
-if options[:database] == 'postgresql'
+if options[:database] == 'postgresql' && !options.skip_docker?
   template 'docker-compose.yml.tt'
 end
 
