@@ -4,15 +4,15 @@
 # invoked remotely via HTTP, that means the files are not present locally.
 # In that case, use `git clone` to download them to a local temporary dir.
 def add_template_repository_to_source_path
-  if __FILE__ =~ %r{\Ahttps?://}
-    require "tmpdir"
-    source_paths.unshift(tempdir = Dir.mktmpdir("hyperloop-"))
+  if __FILE__.match?(%r{\Ahttps?://})
+    require 'tmpdir'
+    source_paths.unshift(tempdir = Dir.mktmpdir('hyperloop-'))
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
-      "--quiet",
-      "https://github.com/anthony-robin/hyperloop.git",
+      '--quiet',
+      'https://github.com/anthony-robin/hyperloop.git',
       tempdir
-    ].map(&:shellescape).join(" ")
+    ].map(&:shellescape).join(' ')
 
     if (branch = __FILE__[%r{hyperloop/(.+)/template.rb}, 1])
       Dir.chdir(tempdir) { git checkout: branch }
@@ -22,10 +22,10 @@ def add_template_repository_to_source_path
   end
 end
 
-say "=============================================================", :green
-say "Hyperloop 🚄 is building a fresh new Rails app for you ✨", :green
-say "It could take while, please be patient...", :green
-say "=============================================================", :green
+say '=============================================================', :green
+say 'Hyperloop 🚄 is building a fresh new Rails app for you ✨', :green
+say 'It could take while, please be patient...', :green
+say '=============================================================', :green
 
 @authentication = yes?('Do you want authentication ? (Y/n)')
 
@@ -68,9 +68,7 @@ unless options.skip_rubocop?
             'config.generators.apply_rubocop_autocorrect_after_generate!'
 end
 
-if options[:database] == 'postgresql' && !options.skip_docker?
-  template 'docker-compose.yml.tt'
-end
+template 'docker-compose.yml.tt' if options[:database] == 'postgresql' && !options.skip_docker?
 
 directory 'app/services'
 template 'app/controllers/application_controller.rb.tt', force: true
@@ -126,7 +124,7 @@ after_bundle do
   generate('action_text:install') unless options.skip_action_text?
   rails_command('active_storage:install') unless options.skip_active_storage?
 
-  install_and_configure_tailwindcss if options[:css] == "tailwind"
+  install_and_configure_tailwindcss if options[:css] == 'tailwind'
 
   template 'config/initializers/mission_control.rb.tt'
 
@@ -208,10 +206,10 @@ def install_and_configure_authentication
   generate('migration add_fields_to_user first_name:string last_name:string role:integer')
 
   # Update migration null and default value for role
-  migration_file = Dir.glob("db/migrate/*add_fields_to_user.rb").first
+  migration_file = Dir.glob('db/migrate/*add_fields_to_user.rb').first
   content = File.read(migration_file)
-  updated_content = content.gsub(/add_column :users, :role, :integer/, "add_column :users, :role, :integer, null: false, default: 0")
-  File.open(migration_file, "w") { |file| file.puts updated_content }
+  updated_content = content.gsub('add_column :users, :role, :integer', 'add_column :users, :role, :integer, null: false, default: 0')
+  File.open(migration_file, 'w') { |file| file.puts updated_content }
 
   copy_file 'app/controllers/registrations_controller.rb'
   directory 'app/controllers/me'
@@ -227,7 +225,7 @@ def install_and_configure_authentication
   directory 'app/views/admin'
 
   inject_into_file 'app/controllers/sessions_controller.rb',
-    after: 'class SessionsController < ApplicationController' do
+                   after: 'class SessionsController < ApplicationController' do
     <<-RUBY
       \n
       layout 'session'
@@ -235,7 +233,7 @@ def install_and_configure_authentication
   end
 
   inject_into_file 'app/controllers/passwords_controller.rb',
-    after: 'class PasswordsController < ApplicationController' do
+                   after: 'class PasswordsController < ApplicationController' do
     <<-RUBY
       \n
       layout 'session'
@@ -243,7 +241,7 @@ def install_and_configure_authentication
   end
 
   inject_into_file 'app/controllers/registrations_controller.rb',
-    after: 'class RegistrationsController < ApplicationController' do
+                   after: 'class RegistrationsController < ApplicationController' do
     <<-RUBY
       \n
       layout 'session'
@@ -310,22 +308,22 @@ def initial_commit
 
   git :init
   git add: '.'
-  git commit: %Q{ -m 'Initial commit' }
+  git commit: %( -m 'Initial commit' )
 end
 
 def print_final_instructions
-  say "============================================================="
-  say "Hyperloop 🚄 successfully created your Rails app ! 🎉🎉🎉", :green
+  say '============================================================='
+  say 'Hyperloop 🚄 successfully created your Rails app ! 🎉🎉🎉', :green
   say
-  say "Switch to your app by running:"
+  say 'Switch to your app by running:'
   say "$ cd #{app_name}", :yellow
   say
-  say "Then run:"
-  say "$ bin/dev", :yellow
+  say 'Then run:'
+  say '$ bin/dev', :yellow
   say
-  say "Then open:"
+  say 'Then open:'
   say "http://localhost:#{@port}", :yellow
   say
-  say "Database is already filled with default values of db/seeds.rb. Enjoy!"
-  say "============================================================="
+  say 'Database is already filled with default values of db/seeds.rb. Enjoy!'
+  say '============================================================='
 end

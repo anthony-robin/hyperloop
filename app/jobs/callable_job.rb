@@ -25,8 +25,8 @@ class CallableJob < ApplicationJob
   queue_as :default
 
   # @param callable_name [String] the service class name
-  # @param * [Array<Object>] any service's parameters
-  def perform(callable_name, *)
-    callable_name.constantize.call(*)
+  # @param *args [Array<Object>] any service's parameters
+  def perform(callable_name, *args)
+    callable_name.constantize.call(*args)
   end
 end
