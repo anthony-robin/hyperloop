@@ -31,22 +31,22 @@ Layout/ClassStructure:
       - prepend
       - extend
   ExpectedOrder:
-      - module_inclusion
-      - constants
-      - enum
-      - public_attribute_macros
-      - association
-      - macros
-      - callbacks
-      - public_class_methods
-      - initializer
-      - public_delegate
-      - public_methods
-      - protected_attribute_macros
-      - protected_methods
-      - private_attribute_macros
-      - private_delegate
-      - private_methods
+    - module_inclusion
+    - constants
+    - enum
+    - public_attribute_macros
+    - association
+    - macros
+    - callbacks
+    - public_class_methods
+    - initializer
+    - public_delegate
+    - public_methods
+    - protected_attribute_macros
+    - protected_methods
+    - private_attribute_macros
+    - private_delegate
+    - private_methods
 
 # Align ends correctly.
 Layout/EndAlignment:
@@ -59,7 +59,7 @@ Layout/FirstHashElementIndentation:
 # This cop checks for ambiguous block association with method when param passed without parentheses.
 Lint/AmbiguousBlockAssociation:
   Exclude:
-    - 'spec/**/*.rb'
+    - "spec/**/*.rb"
 
 # This cop looks for error classes inheriting from `Exception` and its standard library subclasses, excluding subclasses of `StandardError`.
 Lint/InheritException:
@@ -92,6 +92,10 @@ Rails/ActionOrder:
     - update
     - destroy
 
+Rails/DynamicFindBy:
+  AllowedMethods:
+    - find_by_password_reset_token! # Related to Rails authentication
+
 # This cop checks for consistent uses of request.referer or request.referrer, depending on the cop's configuration.
 Rails/RequestReferer:
   EnforcedStyle: referer
@@ -114,8 +118,8 @@ Style/HashSyntax:
 # Use `%`-literal delimiters consistently.
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
-    default:  '()'
-    '%i': '[]'
-    '%w': '[]'
-    '%W': '[]'
-    '%r': '{}'
+    default: "()"
+    "%i": "[]"
+    "%w": "[]"
+    "%W": "[]"
+    "%r": "{}"

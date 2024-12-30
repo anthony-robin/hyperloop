@@ -17,7 +17,7 @@ module Me
     private
 
     def profile_params
-      params.require(:user).permit(:first_name, :last_name, :email)
+      params.require(:user).permit(:first_name, :last_name, :email_address)
     end
   end
 end

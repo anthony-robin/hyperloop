@@ -1,0 +1,16 @@
+= render 'session_box', title: 'Réinitialiser mon mot de passe' do
+  = simple_form_for '',
+                    url: password_path(params[:token]),
+                    method: :put,
+                    html: { class: 'space-y-5' } do |f|
+    = f.input :password,
+              required: true,
+              autocomplete: "new-password"
+
+    = f.input :password_confirmation,
+              as: :password,
+              required: true,
+              autocomplete: "new-password"
+
+    .flex.justify-end
+      = f.button :submit, 'Mettre à jour le mot de passe'

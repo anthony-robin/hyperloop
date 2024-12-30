@@ -1,0 +1,32 @@
+= render 'session_box', title: "S'inscrire" do
+  = simple_form_for @user,
+                    url: registration_path,
+                    html: { \
+                      class: 'space-y-5', \
+                      data: { turbo: false } \
+                    } do |f|
+    = f.input :email_address,
+              as: :email,
+              required: true,
+              autofocus: true,
+              autocomplete: "username",
+              input_html: { value: params.dig(:user, :email_address) }
+
+    = f.input :password,
+              required: true,
+              autocomplete: "current-password",
+              hint: false
+
+    = f.input :password_confirmation,
+              as: :password,
+              required: true,
+              autocomplete: "current-password",
+              hint: false
+
+    .flex.justify-end
+      = f.button :submit, "S'inscrire"
+
+  .text-sm.text-gray-500.text-center.mt-6
+    = link_to "Mot de passe oublié ?", new_password_path, class: "text-gray-700 underline"
+    br
+    = link_to "Se connecter ?", new_session_path, class: "text-gray-700 underline"
