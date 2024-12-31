@@ -27,6 +27,8 @@ say 'Hyperloop 🚄 is building a fresh new Rails app for you ✨', :green
 say 'It could take while, please be patient...', :green
 say '=============================================================', :green
 
+# @port = 3000
+@port = ask('What port do you want the app to run ?', default: 3000)
 @authentication = yes?('Do you want authentication ? (Y/n)')
 
 add_template_repository_to_source_path
@@ -90,13 +92,10 @@ copy_file 'config/initializers/ribbonit.rb'
 copy_file 'lib/tasks/annotaterb.rake'
 copy_file '.annotaterb.yml'
 
-@port = 3000 # ask('What port do you want the app to run ?')
-
 file '.env', <<~ENV
   PORT=#{@port.presence || 3000}
   # SOLID_QUEUE_IN_PUMA="true"
 ENV
-
 
 after_bundle do
   run 'dotenv -t .env'
