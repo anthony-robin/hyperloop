@@ -97,9 +97,10 @@ file '.env', <<~ENV
   # SOLID_QUEUE_IN_PUMA="true"
 ENV
 
-run 'dotenv -t .env'
 
 after_bundle do
+  run 'dotenv -t .env'
+
   install_and_configure_simple_form
 
   template 'app/views/layouts/application.html.slim.tt'
