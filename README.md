@@ -13,11 +13,18 @@ If you don't have yet the project cloned, fetch it from remote URL:
 $ rails new myapp -m https://raw.githubusercontent.com/anthony-robin/hyperloop/master/template.rb
 ```
 
-If you already cloned it:
+If you already have it cloned:
 
 ```shell
 $ rails new myapp -m hyperloop/template.rb
 ```
+
+> [!WARNING]
+> Some arguments from the `rails new` command might not be compatible with the template. Here are some flags that works well:
+>
+> ```bash
+> $ rails new myapp -m hyperloop/template.rb --css=tailwind --skip-ci --skip-test --skip-system-test --skip-brakeman --skip-active-storage --skip-action-text --skip-action-mailbox --skip-kamal --skip-git
+> ```
 
 Wait for the end of the installer, then start it with:
 
@@ -33,11 +40,11 @@ In production:
 
 - [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for javascript related features
 - [slim-rails](https://github.com/slim-template/slim-rails) for views templates
-- [tailwindcss-rails](https://github.com/rails/tailwindcss-rails) as frontend framework
+- [tailwindcss-rails](https://github.com/rails/tailwindcss-rails) as frontend framework (require `--css=tailwind` flag in the command line)
 - [simple_form](https://github.com/heartcombo/simple_form/) for handling forms inputs
 - [pagy](https://github.com/ddnexus/pagy) for pagination
 - [meta-tags](https://github.com/kpumuk/meta-tags) for SEO friendly
-- [action_policy](https://github.com/palkan/action_policy) as authorization actions verifier
+- [action_policy](https://github.com/palkan/action_policy) as authorization actions verifier (only if authentication is `yes`)
 - [dotenv-rails](https://github.com/bkeepers/dotenv) to handle `.env` files
 - [activestorage](https://github.com/rails/rails/tree/main/activestorage) and [actiontext](https://github.com/rails/rails/tree/main/actiontext) available by default
 - [ffaker](https://github.com/ffaker/ffaker) to generate fake data (seed database)
@@ -49,11 +56,9 @@ In development:
 - [bullet](https://github.com/flyerhzm/bullet) to track N+1 queries
 - [chusaku](https://github.com/nshki/chusaku) to print routes URL above controller actions
 - [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to intercept emails and print them in browser
-- [ruby-lsp-rails](https://github.com/Shopify/ruby-lsp-rails) to have better rails integration into editor
 - [rubocop](https://github.com/rubocop/rubocop) and its extensions for coding conventions (very opinionated)
 - [ribbonit](https://github.com/anthony-robin/ribbonit) to display Ruby and Rails informations
-- [ruby-lsp-rails](https://github.com/Shopify/ruby-lsp-rails) to improve rich features in editors
-- [hotwire-livereload](https://github.com/kirillplatonov/hotwire-livereload) to reload browser page on save
+- [spark](https://github.com/hotwired/spark) to reload browser page on HTML, CSS, JS modifications.
 
 ### Frontend
 
