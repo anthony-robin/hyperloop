@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       start_new_session_for @user
-      redirect_to root_path, notice: 'Successfully signed up!'
+      redirect_to root_path, notice: t('.notice')
     else
       render :new
     end

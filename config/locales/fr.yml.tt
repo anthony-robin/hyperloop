@@ -1,0 +1,85 @@
+fr:
+  edit: Modifier
+  destroy: Supprimer
+  back: ↞ Retour
+  add: Ajouter +
+  actions: Actions
+
+  <%- if @authentication -%>
+  application:
+    header:
+      my_account: Mon compte
+      my_profile: Mon profil
+      admin_side: Espace administrateur
+      sign_out: Déconnexion
+
+  admin:
+    sidebar:
+      my_account: Mon compte
+      my_profile: Mon profil
+      frontend_website: ↞ Site
+      sign_out: Déconnexion
+
+    users:
+      index:
+        title: Liste des utilisateurs
+
+      new:
+        title: Ajouter un utilisateur
+
+      create:
+        notice: L'utilisateur a bien été créé
+
+      edit:
+        title: Modifier un utilisateur
+
+      update:
+        notice: L'utilisateur a bien été modifié
+
+      destroy:
+        notice: L'utilisateur a bien été supprimé
+
+  passwords:
+    new:
+      title: Réinitialiser mon mot de passe
+      submit: Envoyer les instructions par email
+      found_my_password: J'ai retrouvé mon mot de passe, je me connecte !
+
+    create:
+      notice: Les instructions ont été envoyées (si l'email renseigné existe bien).
+
+    edit:
+      title: Réinitialiser mon mot de passe
+      submit: Mettre à jour mon mot de passe
+      alert_invalid: Le lien de réinitialisation du mot de passe est invalide ou a expiré.
+
+    update:
+      notice: Le mot de passe a bien été réinitialisé.
+      alert: Les mots de passe ne concordent pas.
+      alert_invalid: Le lien de réinitialisation du mot de passe est invalide ou a expiré.
+
+  sessions:
+    new:
+      title: Se connecter
+      forgot_password: Mot de passe oublié ?
+      register: S'inscrire
+
+    create:
+      try_again_later: Réessayer plus tard.
+      alert: Essayez un autre email ou mot de passe.
+
+  registrations:
+    new:
+      title: S'inscrire
+      forgot_password: Mot de passe oublié ?
+      sign_in: Se connecter
+
+    create:
+      notice: Inscription réussie !
+
+  me:
+    profiles:
+      edit:
+        title: Mon profil
+        submit: Modifier mon profil
+  <%- end -%>

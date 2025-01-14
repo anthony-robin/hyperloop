@@ -15,6 +15,12 @@ en:
       edit:
         title: Reset password
 
+    registrations:
+      new:
+        title: User registration
+      edit:
+        title: User registration
+
     sessions:
       new:
         title: User signin

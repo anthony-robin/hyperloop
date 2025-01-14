@@ -1,5 +1,5 @@
 article
-  h2 Se connecter
+  h2= t('.title')
 
   = simple_form_for '', url: session_path do |f|
     = f.input :email_address,
@@ -13,9 +13,9 @@ article
               required: true,
               autocomplete: "current-password"
 
-    = f.button :submit, 'Se connecter'
+    = f.button :submit, t('.title')
 
   div
-    = link_to "Mot de passe oublié ?", new_password_path
+    = link_to t('.forgot_password'), new_password_path
     br
-    = link_to "S'inscrire", new_registration_path
+    = link_to t('.register'), new_registration_path

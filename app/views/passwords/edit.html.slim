@@ -1,5 +1,5 @@
 article
-  h2 Réinitialiser mon mot de passe
+  h2= t('.title')
 
   = simple_form_for '',
                     url: password_path(params[:token]),
@@ -13,4 +13,4 @@ article
               required: true,
               autocomplete: "new-password"
 
-    = f.button :submit, 'Mettre à jour le mot de passe'
+    = f.button :submit, t('.submit')

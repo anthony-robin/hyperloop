@@ -1,5 +1,5 @@
 article
-  h2 Réinitialiser mon mot de passe
+  h2= t('.title')
 
   = simple_form_for '', url: passwords_path do |f|
     = f.input :email_address,
@@ -10,8 +10,8 @@ article
               wrapper: false,
               input_html: { value: params[:email_address] }
 
-    = f.button :submit, "Email reset instructions"
+    = f.button :submit, t('.submit')
 
   div
     = link_to new_session_path do
-      | J'ai retrouvé mon mot de passe, je me connecte !
+      = t('.found_my_password')

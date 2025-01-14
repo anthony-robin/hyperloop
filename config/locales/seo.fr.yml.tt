@@ -15,6 +15,12 @@ fr:
       edit:
         title: Réinitialisation du mot de passe
 
+    registrations:
+      new:
+        title: Inscription utilisateur
+      edit:
+        title: Inscription utilisateur
+
     sessions:
       new:
         title: Connexion utilisateur

@@ -1,5 +1,5 @@
 article
-  h2 S'inscrire
+  h2= t('.title')
 
   = simple_form_for @user,
                     url: registration_path,
@@ -24,9 +24,9 @@ article
               autocomplete: "current-password",
               hint: false
 
-    = f.button :submit, "S'inscrire"
+    = f.button :submit, t('.title')
 
   div
-    = link_to "Mot de passe oublié ?", new_password_path
+    = link_to t('.forgot_password'), new_password_path
     br
-    = link_to "Se connecter ?", new_session_path
+    = link_to t('.sign_in'), new_session_path
