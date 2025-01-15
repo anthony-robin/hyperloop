@@ -1,0 +1,67 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+.turbo-progress-bar {
+    background-color: var(--pico-primary);
+}
+
+/* picoCSS navigation bugfix */
+
+nav[role="navigation"] {
+    overflow: visible;
+}
+@media (max-width: 510px) {
+    nav[role="navigation"] {
+        overflow: hidden;
+    }
+    nav[role="navigation"]:has(input[type="checkbox"]:checked) {
+        overflow: visible;
+    }
+}
+
+/* Basic picocss alerts */
+
+.alert {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    color: var(--color);
+    background-color: var(--background-color);
+    border: 1px solid var(--background-color);
+    background-image: var(--icon);
+    background-position: center left 0.75rem;
+    background-size: calc(19px * 1.5) auto;
+    padding-left: calc(0.75rem * 2 + calc(19px * 1.5));
+}
+
+.alert-danger {
+    --background-color: #ffebee;
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(175, 41, 29, 0.999)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    --color: #b71c1c;
+}
+
+.alert-warning {
+    --background-color: #fff8e1;
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(179, 78, 0, 0.999)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    --color: #994300;
+}
+
+.alert-success {
+    --background-color: #e8f5e9;
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(46, 125, 50, 0.999)' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    --color: #1b5e20;
+}
+
+.alert-info {
+    --background-color: #9bccfd;
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(3, 52, 82, 0.999)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    --color: #02659a;
+}

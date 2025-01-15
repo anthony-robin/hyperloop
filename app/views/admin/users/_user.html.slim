@@ -1,22 +1,18 @@
-tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700.hover:bg-gray-50.dark:hover:bg-gray-600
-  th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+tr
+  th scope="row"
     = user.full_name
 
-  td.px-6.py-4
-    = user.email_address
+  td= user.email_address
+  td= User.human_enum_name(:role, user.role)
 
-  td.px-6.py-4
-    = User.human_enum_name(:role, user.role)
-
-  td.flex.items-center.px-6.py-4
+  td
     - if allowed_to?(:update?, user)
-      = link_to 'Modifier',
-                edit_admin_user_path(user),
-                class: 'edit-link'
+      = link_to 'Modifier', edit_admin_user_path(user)
 
     - if allowed_to?(:destroy?, user)
+      br
+      br
       = button_to 'Supprimer',
                   admin_user_path(user),
                   method: :delete,
-                  data: { turbo_confirm: 'Voulez-vous supprimer cet utilisateur ?' },
-                  class: 'destroy-button ms-3'
+                  data: { turbo_confirm: 'Voulez-vous supprimer cet utilisateur ?' }

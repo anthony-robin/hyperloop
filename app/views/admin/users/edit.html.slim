@@ -1,7 +1,8 @@
-header.flex.items-center.justify-between.mb-6.pb-2.border-b-2.border-primary-color
-  h1.text-lg.font-bold Modifier un utilisateur
+header
+  h2 Modifier un utilisateur
 
   - if allowed_to?(:index?, User)
-    = link_to '<< Retour', admin_users_path, class: 'back-link'
+    = link_to '↞ Retour', admin_users_path
 
-= render 'form', user: @user
+section
+  = render 'form', user: @user

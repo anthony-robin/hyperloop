@@ -18,10 +18,10 @@ fr:
 
     hints:
       user:
-        password: Nouveau mot de passe
-        password_confirmation: Confirmation du nouveau mot de passe
+        # password: Nouveau mot de passe
+        # password_confirmation: Confirmation du nouveau mot de passe
 
     placeholders:
       defaults:
-        email_address: john@doe.com
+        email_address: Email
     <%- end -%>

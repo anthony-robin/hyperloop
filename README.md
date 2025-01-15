@@ -2,9 +2,6 @@
 
 Speed up your new Rails 8.0 projects with a preconfigured set of tools !
 
-> [!NOTE]
-> This template has been built to match as best as possible default changes I make on every new Rails project I work on. It is very opinionated for some configuration so feel free to fork it and adapt it according to your needs.
-
 ## Usage
 
 If you don't have yet the project cloned, fetch it from remote URL:
@@ -23,7 +20,7 @@ $ rails new myapp -m hyperloop/template.rb
 > Some arguments from the `rails new` command might not be compatible with the template. Here are some flags that works well:
 >
 > ```bash
-> $ rails new myapp -m hyperloop/template.rb --css=tailwind --skip-ci --skip-test --skip-system-test --skip-brakeman --skip-active-storage --skip-action-text --skip-action-mailbox --skip-kamal --skip-git
+> $ rails new myapp -m hyperloop/template.rb --skip-ci --skip-test --skip-system-test --skip-brakeman --skip-active-storage --skip-action-text --skip-action-mailbox --skip-kamal --skip-git
 > ```
 
 Wait for the end of the installer, then start it with:
@@ -40,7 +37,6 @@ In production:
 
 - [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for javascript related features
 - [slim-rails](https://github.com/slim-template/slim-rails) for views templates
-- [tailwindcss-rails](https://github.com/rails/tailwindcss-rails) as frontend framework (require `--css=tailwind` flag in the command line)
 - [simple_form](https://github.com/heartcombo/simple_form/) for handling forms inputs
 - [pagy](https://github.com/ddnexus/pagy) for pagination
 - [meta-tags](https://github.com/kpumuk/meta-tags) for SEO friendly
@@ -62,8 +58,7 @@ In development:
 
 ### Frontend
 
-- [TailwindCSS](https://tailwindcss.com/)
-- [Flowbite](https://flowbite.com/) for responsive navbar and sidebar
+- [PicoCSS](https://github.com/Yohn/PicoCSS) as a minimalist prototyping framework.
 
 ### Features
 
@@ -87,7 +82,6 @@ See [Github project](https://github.com/users/anthony-robin/projects/2) for comi
 
 Hyperloop is inspired by:
 
-- projects developed for [La Voix du Chat Artiste](https://github.com/La-Voix-du-chat-artiste/)
 - [excid3/jumpstart](https://github.com/excid3/jumpstart) for its starter template
 - [bdavidxyz/tailstart](https://github.com/bdavidxyz/tailstart) for its starter instructions
 

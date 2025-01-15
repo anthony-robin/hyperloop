@@ -1,57 +1,31 @@
-/ Do not remove this div !
-/ It is a hack to fix a js error that prevent opening back menu
-/ after changing page
-/ @see https://github.com/themesberg/flowbite/issues/698#issuecomment-1811847462
-div drawer-backdrop=""
+aside
+  header
+    = link_to admin_dashboard_path do
+      h2 MyAppPico Admin
 
-button.absolute.top-2.right-2.p-2.text-sm.bg-primary-color.text-white.rounded-lg.sm:hidden.hover:bg-white.hover:text-primary-color.focus:outline-none.focus:ring-2.focus:ring-primary-color.focus:bg-white.focus:text-primary-color.transition-colors.z-50.border.border-primary-color data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button"
-  span.sr-only Open sidebar
-  svg.w-6.h-6 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-    path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+  nav
+    ul id="menu" role="list"
 
-aside.fixed.top-0.left-0.z-40.w-64.md:w-72.h-screen.transition-transform.-translate-x-full.sm:translate-x-0.bg-black.text-white.border-r-4.border-primary-color id="logo-sidebar" aria-label="Sidebar"
-  .flex.flex-col.justify-between.h-full.px-3.py-4
-    .h-full.px-3.py-4.overflow-y-auto.py-5
-      = link_to admin_dashboard_path, class: 'block text-white transition-colors hover:text-primary-color mb-3' do
-        | <%= camelized %>
+      li role="listitem"
+        = link_to 'Les utilisateurs', admin_users_path
 
-      hr.border-gray-400.mb-3
+      li role="listitem"
+        = link_to '↞ Site', root_path
 
-      nav.space-y-3
-        = link_to admin_dashboard_path, class: "flex items-center gap-2 p-2 hover:bg-primary-color rounded-lg transition-colors #{'bg-primary-color text-white' if controller_path == 'admin/dashboards'}" do
-          | Tableau de bord
+      li role="listitem"
+        details.dropdown
+          summary
+            - if current_user.avatar.attached?
+              => image_tag polymorphic_path(current_user.avatar), style: 'width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--pico-primary);'
+              | Mon compte
+            - else
+              | Mon compte
 
-        = link_to admin_users_path, class: "flex items-center gap-2 p-2 hover:bg-primary-color rounded-lg transition-colors #{'bg-primary-color text-white' if controller_path == 'admin/users'}" do
-          | Les utilisateurs
+          ul
+            li
+              = link_to 'Mon profil', edit_me_profile_path
 
-    / User account dropdown
-    button.flex.items-center.justify-center.w-full.p-2.mt-7.mb-12.md:mb-0.text-sm.font-medium.text-white.rounded-full.hover:text-primary-color.ring-1.ring-primary-color.focus:ring-2 id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" type="button"
-      span.sr-only Open user menu
-      <%- unless options.skip_active_storage? -%>
-
-      - if current_user.avatar.attached?
-        = image_tag current_user.avatar, class: 'w-8 h-8 me-2 object-cover rounded-full'
-      <%- end -%>
-      = current_user.email_address
-
-      svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"
-        path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"
-
-    / Dropdown menu
-    #dropdownAvatarName.z-10.hidden.divide-y.rounded-lg.shadow.w-56.bg-gray-700.divide-gray-600
-      .px-4.py-3.text-sm.text-white
-        .font-medium= current_user.full_name
-        .truncate= current_user.email_address
-
-      ul.py-2.text-sm.text-gray-200 aria-labelledby="dropdownAvatarNameButton"
-        li
-          = link_to 'Mon profil', edit_me_profile_path, class: 'block px-4 py-2 hover:bg-gray-600 hover:text-white'
-
-        li
-          = link_to 'Retour au site', root_path, class: 'block px-4 py-2 hover:bg-gray-600 hover:text-white'
-
-      .py-2
-        = link_to 'Déconnexion',
-                  session_path,
-                  data: { turbo_method: :delete },
-                  class: 'block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white'
+            li
+              = link_to 'Déconnexion',
+                        session_path,
+                        data: { turbo_method: :delete }
