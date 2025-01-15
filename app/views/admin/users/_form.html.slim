@@ -1,29 +1,8 @@
 = simple_form_for([:admin, user]) do |f|
-  .flex.flex-col.lg:flex-row.items-center.gap-3.mb-5
-    = f.input :first_name,
-              label_html: { class: 'form-label' },
-              input_html: { class: 'form-input' },
-              wrapper_html: { class: 'w-full' }
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :email_address
+  = f.input :password
+  = f.input :password_confirmation
 
-    = f.input :last_name,
-              label_html: { class: 'form-label' },
-              input_html: { class: 'form-input' },
-              wrapper_html: { class: 'w-full' }
-
-  = f.input :email_address,
-            label_html: { class: 'form-label' },
-            input_html: { class: 'form-input' },
-            wrapper_html: { class: 'mb-5' }
-
-  .flex.flex-col.lg:flex-row.items-center.gap-3.mb-5
-    = f.input :password,
-              label_html: { class: 'form-label' },
-              input_html: { class: 'form-input' },
-              wrapper_html: { class: 'w-full' }
-
-    = f.input :password_confirmation,
-              label_html: { class: 'form-label' },
-              input_html: { class: 'form-input' },
-              wrapper_html: { class: 'w-full' }
-
-  = f.button :submit, class: 'add-link cursor-pointer'
+  = f.button :submit

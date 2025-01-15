@@ -1,8 +1,9 @@
-= render 'session_box', title: "S'inscrire" do
+article
+  h2 S'inscrire
+
   = simple_form_for @user,
                     url: registration_path,
                     html: { \
-                      class: 'space-y-5', \
                       data: { turbo: false } \
                     } do |f|
     = f.input :email_address,
@@ -23,10 +24,9 @@
               autocomplete: "current-password",
               hint: false
 
-    .flex.justify-end
-      = f.button :submit, "S'inscrire"
+    = f.button :submit, "S'inscrire"
 
-  .text-sm.text-gray-500.text-center.mt-6
-    = link_to "Mot de passe oublié ?", new_password_path, class: "text-gray-700 underline"
+  div
+    = link_to "Mot de passe oublié ?", new_password_path
     br
-    = link_to "Se connecter ?", new_session_path, class: "text-gray-700 underline"
+    = link_to "Se connecter ?", new_session_path

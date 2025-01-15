@@ -124,7 +124,11 @@ after_bundle do
   generate('action_text:install') unless options.skip_action_text?
   rails_command('active_storage:install') unless options.skip_active_storage?
 
-  install_and_configure_tailwindcss if options[:css] == 'tailwind'
+  if options[:css] == 'tailwind'
+    install_and_configure_tailwindcss
+  elsif options[:css].blank?
+    copy_file 'app/assets/stylesheets/application.css', force: true
+  end
 
   template 'config/initializers/mission_control.rb.tt'
 
@@ -176,6 +180,7 @@ end
 
 def install_and_configure_tailwindcss
   directory 'app/assets/stylesheets', force: true
+  remove_file 'app/assets/stylesheets/application.css'
   copy_file 'config/tailwind.config.js', force: true
 
   inject_into_file 'config/importmap.rb' do
@@ -193,9 +198,8 @@ end
 
 def install_and_configure_simple_form
   generate('simple_form:install')
-  gsub_file 'config/initializers/simple_form.rb', "config.button_class = 'btn'", "config.button_class = 'button'"
-  gsub_file 'config/initializers/simple_form.rb', '# config.label_class = nil', "config.label_class = 'block'"
-  gsub_file 'config/initializers/simple_form.rb', '# config.input_class = nil', "config.input_class = 'w-full'"
+  gsub_file 'config/initializers/simple_form.rb', 'tag: :span, class: :hint', 'tag: :mark, class: :hint'
+  gsub_file 'config/initializers/simple_form.rb', 'tag: :span, class: :error', 'tag: :small'
 
   template 'config/locales/simple_form.en.yml', force: true
   template 'config/locales/simple_form.fr.yml'

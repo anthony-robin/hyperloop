@@ -6,20 +6,26 @@ html
     = csp_meta_tag
     <%- if options[:css] == 'tailwind' -%>
 
-    = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
-    <%- end -%>
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    <%- elsif options[:css].blank? -%>
 
+    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.4/css/pico.css'
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    <%- end -%>
     = stylesheet_link_tag 'ribbon' if Rails.env.development?
 
     = javascript_importmap_tags
 
-  body.bg-primary-color
+  body
     = ribbonit unless Rails.env.production?
 
-    main.flex.flex-col.items-center.justify-center.p-5.h-screen
-      #flash= render 'flash'
+    main.container
+      = link_to root_path do
+        h1 <%= camelized %>
 
-      = yield
+      .row-fluid
+        .col-lg-6.offset-lg-3
+          = render 'flash'
+          = yield
 
     = render 'turbo_confirm'

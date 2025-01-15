@@ -4,23 +4,29 @@ html
     = seo_meta_tags
     = csrf_meta_tags
     = csp_meta_tag
-
     <%- if options[:css] == 'tailwind' -%>
-    = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
-    <%- end -%>
 
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    <%- elsif options[:css].blank? -%>
+
+    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.4/css/pico.css'
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    <%- end -%>
     = stylesheet_link_tag 'ribbon' if Rails.env.development?
 
     = javascript_importmap_tags
 
   body
     = ribbonit unless Rails.env.production?
-    = render 'admin/sidebar'
 
-    main.p-5.h-screen.sm:ml-64.md:ml-72
-      #flash= render 'flash'
+    main.container-fluid
+      .row-fluid
+        .col-12.col-md-3.col-lg-2
+          header
+            = render 'admin/sidebar'
 
-      = yield
+        .col-12.col-md-9.col-lg-10
+          = render 'flash'
+          = yield
 
     = render 'turbo_confirm'
