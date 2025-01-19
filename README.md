@@ -45,6 +45,7 @@ In production:
 - [activestorage](https://github.com/rails/rails/tree/main/activestorage) and [actiontext](https://github.com/rails/rails/tree/main/actiontext) available by default
 - [ffaker](https://github.com/ffaker/ffaker) to generate fake data (seed database)
 - [mission_control-jobs](https://github.com/rails/mission_control-jobs) to manage processed jobs
+- [rails-i18n](https://github.com/svenfuchs/rails-i18n) if locale is different of english
 
 In development:
 
@@ -72,7 +73,18 @@ In development:
   $ docker-compose up -d
   ```
 
-- Project is configured for french and english locales
+### Locales
+
+Project is compatible for `english` and `french` locales out of the box. When generator ask for locales, answer in two letter ISO 639 language code. For multiples locales, separate them with a comma. For example:
+
+```
+- en
+- fr
+- en,fr
+```
+
+> [!Note]
+> In case of multiples locales, the default will be the first one specified.
 
 ## Roadmap
 

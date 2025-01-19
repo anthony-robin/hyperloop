@@ -3,9 +3,13 @@ fr:
     <%- if @authentication -%>
 
     models:
-      user: utilisateur
+      user:
+        one: Utilisateur
+        other: Les utilisateurs
+
     attributes:
       user:
+        full_name: Nom complet
         first_name: Prénom
         last_name: Nom
         email: Email

@@ -1,31 +1,28 @@
 aside
   header
     = link_to admin_dashboard_path do
-      h2 MyAppPico Admin
+      h2 <%= camelized %> Admin
 
   nav
     ul id="menu" role="list"
+      li role="listitem"
+        = link_to User.model_name.human(count: 2), admin_users_path
 
       li role="listitem"
-        = link_to 'Les utilisateurs', admin_users_path
-
-      li role="listitem"
-        = link_to '↞ Site', root_path
+        = link_to t('.frontend_website'), root_path
 
       li role="listitem"
         details.dropdown
           summary
             - if current_user.avatar.attached?
               => image_tag polymorphic_path(current_user.avatar), style: 'width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--pico-primary);'
-              | Mon compte
-            - else
-              | Mon compte
+            = t('.my_account')
 
           ul
             li
-              = link_to 'Mon profil', edit_me_profile_path
+              = link_to t('.my_profile'), edit_me_profile_path
 
             li
-              = link_to 'Déconnexion',
+              = link_to t('.sign_out'),
                         session_path,
                         data: { turbo_method: :delete }

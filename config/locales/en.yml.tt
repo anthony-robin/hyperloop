@@ -1,0 +1,85 @@
+en:
+  edit: Edit
+  destroy: Destroy
+  back: ↞ Back
+  add: Add +
+  actions: Actions
+
+  <%- if @authentication -%>
+  application:
+    header:
+      my_account: My account
+      my_profile: My profile
+      admin_side: Admin side
+      sign_out: Sign out
+
+  admin:
+    sidebar:
+      my_account: My account
+      my_profile: My profile
+      frontend_website: ↞ Website
+      sign_out: Sign out
+
+    users:
+      index:
+        title: Users list
+
+      new:
+        title: Add a user
+
+      create:
+        notice: User has been created
+
+      edit:
+        title: Edit a user
+
+      update:
+        notice: User has been modified
+
+      destroy:
+        notice: User has been destroyed
+
+  passwords:
+    new:
+      title: Reset my password
+      submit: Send instructions by email
+      found_my_password: I found back my password, I sign in !
+
+    create:
+      notice: Password reset instructions sent (if user with that email address exists).
+
+    edit:
+      title: Reset my password
+      submit: Update my password
+      alert_invalid: Password reset link is invalid or has expired.
+
+    update:
+      notice: Password has been reset.
+      alert: Passwords did not match.
+      alert_invalid: Password reset link is invalid or has expired.
+
+  sessions:
+    new:
+      title: Sign in
+      forgot_password: Password forgotten ?
+      register: Register
+
+    create:
+      try_again_later: Try again later.
+      alert: Try another email address or password.
+
+  registrations:
+    new:
+      title: Register
+      forgot_password: Password forgotten ?
+      sign_in: Sign in
+
+    create:
+      notice: Successfully signed up!
+
+  me:
+    profiles:
+      edit:
+        title: My profile
+        submit: Update my profile
+  <%- end -%>

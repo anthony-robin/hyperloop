@@ -1,0 +1,13 @@
+fr:
+  routes:
+    <%- if @authentication -%>
+    session: connexion
+    registration: inscription
+    passwords: mot-de-passe
+
+    users: les-utilisateurs
+    dashboard: tableau-de-bord
+
+    me: mon-compte
+    profile: mon-profil
+    <%- end -%>

@@ -1,0 +1,4 @@
+fr:
+  passwords_mailer:
+    reset:
+      subject: Réinitialiser mon mot de passe

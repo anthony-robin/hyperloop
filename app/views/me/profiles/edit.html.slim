@@ -1,5 +1,5 @@
 article
-  h2 Mon profil
+  h2= t('.title')
 
   section role="form"
     = simple_form_for current_user, url: [:me, :profile] do |f|
@@ -7,4 +7,4 @@ article
       = f.input :last_name
       = f.input :email_address
 
-      = f.button :submit, 'Modifier mon profil'
+      = f.button :submit, t('.submit')

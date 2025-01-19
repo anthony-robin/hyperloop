@@ -1,8 +1,8 @@
 header
-  h2 Liste des utilisateurs
+  h2= t('.title')
 
   - if allowed_to?(:create?, User)
-    = link_to 'Ajouter +', new_admin_user_path
+    = link_to t('add'), new_admin_user_path
 
 == pagy_nav(@pagy) if @pagy.pages > 1
 
@@ -10,10 +10,10 @@ section#users.overflow-auto
   table.striped
     thead
       tr
-        th scope="col" Nom complet
-        th scope="col" Email
-        th scope="col" Rôle
-        th scope="col" Actions
+        th scope="col" = User.human_attribute_name(:full_name)
+        th scope="col" = User.human_attribute_name(:email_address)
+        th scope="col" = User.human_attribute_name(:role)
+        th scope="col" = t('actions')
 
     tbody
       = render @users

@@ -29,7 +29,7 @@ module Admin
       end
 
       if @user.save
-        redirect_to admin_users_path, notice: "L'utilisateur a bien été créé, un email lui a été envoyé"
+        redirect_to admin_users_path, notice: t('.notice')
       else
         render :new, status: :unprocessable_entity
       end
@@ -46,7 +46,7 @@ module Admin
       authorize! @user
 
       if @user.update(user_params)
-        redirect_to admin_users_path, notice: "L'utilisateur a bien été modifié"
+        redirect_to admin_users_path, notice: t('.notice')
       else
         render :edit, status: :unprocessable_entity
       end
@@ -58,7 +58,7 @@ module Admin
 
       @user.destroy
 
-      redirect_to admin_users_path, notice: "L'utilisateur a bien été supprimé"
+      redirect_to admin_users_path, notice: t('.notice')
     end
 
     private
