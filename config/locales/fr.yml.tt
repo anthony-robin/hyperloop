@@ -20,6 +20,10 @@ fr:
       frontend_website: ↞ Site
       sign_out: Déconnexion
 
+    dashboards:
+      show:
+        title: Tableau de bord administrateur
+
     users:
       index:
         title: Liste des utilisateurs
@@ -82,4 +86,7 @@ fr:
       edit:
         title: Mon profil
         submit: Modifier mon profil
+
+      update:
+        notice: Votre profil a bien été mis à jour
   <%- end -%>

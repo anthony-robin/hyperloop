@@ -8,7 +8,7 @@ module Me
     # @route PUT /me/profile (me_profile)
     def update
       if current_user.update(profile_params)
-        redirect_to edit_me_profile_path, notice: 'Votre profil a bien été mis à jour'
+        redirect_to edit_me_profile_path, notice: t('.notice')
       else
         render :edit, status: :unprocessable_entity
       end

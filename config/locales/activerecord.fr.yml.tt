@@ -12,7 +12,7 @@ fr:
         full_name: Nom complet
         first_name: Prénom
         last_name: Nom
-        email: Email
+        email_address: Email
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe
         role: Rôle

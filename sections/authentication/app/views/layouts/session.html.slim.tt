@@ -9,24 +9,24 @@ html
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     <%- elsif options[:css].blank? -%>
 
-    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.4/css/pico.css'
+    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.9/css/pico.min.css'
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = stylesheet_link_tag 'flash', 'data-turbo-track': 'reload'
     <%- end -%>
-    = stylesheet_link_tag 'ribbon' if Rails.env.development?
+    = stylesheet_link_tag 'ribbon' unless Rails.env.production?
 
     = javascript_importmap_tags
 
   body
     = ribbonit unless Rails.env.production?
 
-    main.container-fluid
-      .row-fluid
-        .col-12.col-md-3.col-lg-2
-          header
-            = render 'admin/sidebar'
+    main.container
+      = link_to root_path do
+        h1 <%= camelized %>
 
-        .col-12.col-md-9.col-lg-10
-          = render 'flash'
+      .row-fluid
+        .col-lg-6.offset-lg-3
+          #flash= render 'flash'
           = yield
 
     = render 'turbo_confirm'
