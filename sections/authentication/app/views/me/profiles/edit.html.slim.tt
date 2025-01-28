@@ -1,0 +1,21 @@
+article
+  h2= t('.title')
+
+  section role="form"
+    = simple_form_for current_user, url: [:me, :profile] do |f|
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email_address
+      <%- unless options.skip_active_storage? -%>
+
+      .row-fluid
+        = f.input :avatar, as: :file, wrapper_html: { class: 'col-12 col-md-8' }
+
+        - if f.object.avatar.attached?
+          = image_tag polymorphic_path(f.object.avatar),
+                      style: 'margin: 0 auto;',
+                      class: 'col-12 col-md-4'
+        br
+      <%- end -%>
+
+      = f.button :submit, t('.submit')

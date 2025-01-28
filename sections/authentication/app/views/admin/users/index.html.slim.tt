@@ -10,6 +10,9 @@ section#users.overflow-auto
   table.striped
     thead
       tr
+        <%- unless options.skip_active_storage? -%>
+        th scope="col" = User.human_attribute_name(:avatar)
+        <%- end -%>
         th scope="col" = User.human_attribute_name(:full_name)
         th scope="col" = User.human_attribute_name(:email_address)
         th scope="col" = User.human_attribute_name(:role)

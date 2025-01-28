@@ -6,7 +6,11 @@ module Admin
     def index
       authorize! User
 
+      <%- if options.skip_active_storage? -%>
       @pagy, @users = pagy(User.order(created_at: :desc))
+      <%- else -%>
+      @pagy, @users = pagy(User.includes(:avatar_attachment).order(created_at: :desc))
+      <%- end -%>
     end
 
     # @route GET /admin/users/new (new_admin_user)
@@ -68,10 +72,18 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(
-        :first_name, :last_name, :email_address,
-        :password, :password_confirmation
-      )
+      <%- if options.skip_active_storage? -%>
+      params.expect(user: %i[
+        first_name last_name email_address
+        password password_confirmation
+      ])
+      <%- else -%>
+      params.expect(user: %i[
+        first_name last_name email_address
+        password password_confirmation
+        avatar
+      ])
+      <%- end -%>
     end
   end
 end
