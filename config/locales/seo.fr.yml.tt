@@ -4,7 +4,7 @@ fr:
       title: Titre de la page
       description: Description de la page
 
-    homes:
+    welcome:
       show:
         title: Accueil
     <%- if @authentication -%>

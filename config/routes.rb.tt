@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   <%- if @locales.count > 1 -%>
   localized do
-    root to: 'homes#show'
+    root to: 'welcome#index'
     <%- if @authentication -%>
 
     resource :session, only: %i[new create show destroy]
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     <%- end -%>
   end
   <%- else -%>
-  root to: 'homes#show'
+  root to: 'welcome#index'
   <%- if @authentication -%>
 
   resource :session, only: %i[new create show destroy]

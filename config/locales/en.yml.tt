@@ -20,6 +20,10 @@ en:
       frontend_website: ↞ Website
       sign_out: Sign out
 
+    dashboards:
+      show:
+        title: Admin dashboard
+
     users:
       index:
         title: Users list
@@ -82,4 +86,7 @@ en:
       edit:
         title: My profile
         submit: Update my profile
+
+      update:
+        notice: Your profile has been updated
   <%- end -%>

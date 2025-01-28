@@ -17,7 +17,7 @@ $ rails new myapp -m hyperloop/template.rb
 ```
 
 > [!WARNING]
-> Some arguments from the `rails new` command might not be compatible with the template. Here are some flags that works well:
+> Some arguments from the `rails new` command might not be compatible with the template. Here are some flags that work well:
 >
 > ```bash
 > $ rails new myapp -m hyperloop/template.rb --skip-ci --skip-test --skip-system-test --skip-brakeman --skip-active-storage --skip-action-text --skip-action-mailbox --skip-kamal --skip-git
@@ -35,7 +35,7 @@ $ bin/dev
 
 In production:
 
-- [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for javascript related features
+- [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for JavaScript related features
 - [slim-rails](https://github.com/slim-template/slim-rails) for views templates
 - [simple_form](https://github.com/heartcombo/simple_form/) for handling forms inputs
 - [pagy](https://github.com/ddnexus/pagy) for pagination
@@ -45,7 +45,7 @@ In production:
 - [activestorage](https://github.com/rails/rails/tree/main/activestorage) and [actiontext](https://github.com/rails/rails/tree/main/actiontext) available by default
 - [ffaker](https://github.com/ffaker/ffaker) to generate fake data (seed database)
 - [mission_control-jobs](https://github.com/rails/mission_control-jobs) to manage processed jobs
-- [rails-i18n](https://github.com/svenfuchs/rails-i18n) if locale is different of english
+- [rails-i18n](https://github.com/svenfuchs/rails-i18n) if locale is different of English
 
 In development:
 
@@ -54,7 +54,7 @@ In development:
 - [chusaku](https://github.com/nshki/chusaku) to print routes URL above controller actions
 - [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to intercept emails and print them in browser
 - [rubocop](https://github.com/rubocop/rubocop) and its extensions for coding conventions (very opinionated)
-- [ribbonit](https://github.com/anthony-robin/ribbonit) to display Ruby and Rails informations
+- [ribbonit](https://github.com/anthony-robin/ribbonit) to display Ruby and Rails information
 - [spark](https://github.com/hotwired/spark) to reload browser page on HTML, CSS, JS modifications.
 
 ### Frontend
@@ -75,7 +75,7 @@ In development:
 
 ### Locales
 
-Project is compatible for `english` and `french` locales out of the box. When generator ask for locales, answer in two letter ISO 639 language code. For multiples locales, separate them with a comma. For example:
+Project is compatible for `english` and `french` locales out of the box. When generator ask for locales, answer in two letters ISO 639 language code. For multiple locales, separate them with a comma. For example:
 
 ```
 - en
@@ -83,7 +83,7 @@ Project is compatible for `english` and `french` locales out of the box. When ge
 - en,fr
 ```
 
-> [!Note]
+> [!NOTE]
 > In case of multiples locales, the default will be the first one specified.
 
 ## Roadmap

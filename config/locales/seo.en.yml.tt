@@ -4,7 +4,7 @@ en:
       title: Website page title
       description: Website page description
 
-    homes:
+    welcome:
       show:
         title: Home
     <%- if @authentication -%>
