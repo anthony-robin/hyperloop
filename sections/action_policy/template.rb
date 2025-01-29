@@ -21,7 +21,8 @@ insert_into_file 'app/controllers/application_controller.rb',
   RUBY
 end
 
-directory 'app/policies', force: true
+copy_file 'app/policies/application_policy.rb', force: true
+directory 'app/policies/admin', force: true if @admin_dashboard
 
 # Locales
 copy_file 'config/locales/action_policy.en.yml' if 'en'.in?(@locales)

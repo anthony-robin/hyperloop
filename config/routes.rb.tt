@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     <%- end -%>
 
     draw :me
+    <%- if @admin_dashboard -%>
     draw :admin
+    <%- end -%>
     <%- end -%>
   end
   <%- else -%>
@@ -38,7 +40,9 @@ Rails.application.routes.draw do
   <%- end -%>
 
   draw :me
+  <%- if @admin_dashboard -%>
   draw :admin
+  <%- end -%>
   <%- end -%>
   <%- end -%>
 end

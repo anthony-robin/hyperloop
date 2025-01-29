@@ -23,6 +23,12 @@ $ rails new myapp -m hyperloop/template.rb
 > $ rails new myapp -m hyperloop/template.rb --skip-ci --skip-test --skip-system-test --skip-brakeman --skip-active-storage --skip-action-text --skip-action-mailbox --skip-kamal --skip-git
 > ```
 
+Generator will ask several questions to refine configuration:
+- What port the server should run (default: `3000`)
+- What language the app should handle (default: `en`)
+- Is an authentication needed ?
+  - If yes, does an admin dashboard is needed ?
+
 Wait for the end of the installer, then start it with:
 
 ```shell

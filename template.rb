@@ -28,8 +28,10 @@ say 'It could take a while, please be patient...', :green
 say '=============================================================', :green
 
 @port = ask('What port do you want the app to run ?', default: 3000)
-@authentication = yes?('Do you want authentication ? (Y/n)')
 @raw_locales = ask('Which locale(s) do you want ? (eg: en,fr)', default: 'en')
+
+@authentication = yes?('Do you need authentication ? (Y/n)')
+@admin_dashboard = yes?('Do you need an admin dashboard ? (Y/n)') if @authentication
 
 @locales = @raw_locales.gsub(/\s+/, '').split(',').compact_blank
 @locales.select! { |l| l.size == 2 } # Skip wrongly formatted locales

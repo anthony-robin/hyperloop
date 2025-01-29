@@ -25,11 +25,13 @@ nav role="navigation"
           ul dir="rtl"
             li
               = link_to t('.my_profile'), edit_me_profile_path
+            <%- if @admin_dashboard -%>
 
             - if allowed_to?(:show?, with: Admin::DashboardPolicy)
               li
                 = link_to t('.admin_side'), admin_dashboard_path
 
+            <%- end -%>
             li
               = link_to t('.sign_out'),
                         session_path,

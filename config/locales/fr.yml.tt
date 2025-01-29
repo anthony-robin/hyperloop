@@ -10,8 +10,11 @@ fr:
     header:
       my_account: Mon compte
       my_profile: Mon profil
+      <%- if @admin_dashboard -%>
       admin_side: Espace administrateur
+      <%- end -%>
       sign_out: Déconnexion
+  <%- if @admin_dashboard -%>
 
   admin:
     sidebar:
@@ -42,6 +45,7 @@ fr:
 
       destroy:
         notice: L'utilisateur a bien été supprimé
+  <%- end -%>
 
   passwords:
     new:

@@ -10,8 +10,11 @@ en:
     header:
       my_account: My account
       my_profile: My profile
+      <%- if @admin_dashboard -%>
       admin_side: Admin side
+      <%- end -%>
       sign_out: Sign out
+  <%- if @admin_dashboard -%>
 
   admin:
     sidebar:
@@ -42,6 +45,7 @@ en:
 
       destroy:
         notice: User has been destroyed
+  <%- end -%>
 
   passwords:
     new:

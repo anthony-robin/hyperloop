@@ -16,22 +16,15 @@ File.open(migration_file, 'w') { |file| file.puts updated_content }
 
 copy_file 'app/controllers/registrations_controller.rb'
 directory 'app/controllers/me'
-directory 'app/controllers/admin'
 template 'app/models/user.rb', force: true
-
 template 'app/views/layouts/session.html.slim'
-template 'app/views/layouts/admin.html.slim'
+directory 'app/views/me'
+copy_file 'config/routes/me.rb'
 
 # Views not generated in slim :(
 directory 'app/views/registrations'
 directory 'app/views/sessions', force: true
 directory 'app/views/passwords', force: true unless options.skip_action_mailer?
-
-directory 'app/views/me'
-directory 'app/views/admin'
-
-# Routes
-directory 'config/routes'
 
 gsub_file 'config/routes.rb', "resource :session\n  resources :passwords, param: :token", '' if @locales.count > 1
 
@@ -130,4 +123,20 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 unless options.skip_git?
   git add: '-A .'
   git commit: "-n -m 'Install and configure Rails 8 authentication'"
+end
+
+# Admin dashboard
+
+if @admin_dashboard
+  copy_file 'config/routes/admin.rb'
+  directory 'app/controllers/admin'
+  directory 'app/views/admin'
+  template 'app/views/layouts/admin.html.slim'
+
+  run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
+
+  unless options.skip_git?
+    git add: '-A .'
+    git commit: "-n -m 'Scaffold admin dashboard'"
+  end
 end

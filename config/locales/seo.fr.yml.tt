@@ -30,6 +30,7 @@ fr:
     me/profiles:
       edit:
         title: Mon profil
+    <%- if @admin_dashboard -%>
 
     admin/dashboards:
       show:
@@ -44,4 +45,5 @@ fr:
 
       edit:
         title: Modifier un utilisateur
+    <%- end -%>
     <%- end -%>
