@@ -11,7 +11,7 @@ article
       .row-fluid
         = f.input :avatar, as: :file, wrapper_html: { class: 'col-12 col-md-8' }
 
-        - if f.object.avatar.attached?
+        - if f.object.avatar.attached? && f.object.avatar.persisted?
           = image_tag polymorphic_path(f.object.avatar),
                       style: 'margin: 0 auto;',
                       class: 'col-12 col-md-4'

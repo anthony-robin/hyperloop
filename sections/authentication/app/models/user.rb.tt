@@ -21,6 +21,14 @@ class User < ApplicationRecord
             presence: true,
             format: { with: URI::MailTo::EMAIL_REGEXP },
             uniqueness: { case_sensitive: false }
+  <%- unless options.skip_active_storage? -%>
+  validates :avatar,
+            size: { less_than: 1.megabyte },
+            content_type: {
+              in: [:png, :jpeg],
+              spoofing_protection: true
+            }
+  <%- end -%>
 
   def full_name
     "#{first_name} #{last_name}"

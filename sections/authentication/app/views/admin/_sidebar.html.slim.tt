@@ -17,7 +17,7 @@ aside
             <%- if options.skip_active_storage? -%>
             = t('.my_account')
             <%- else -%>
-            - if current_user.avatar.attached?
+            - if current_user.avatar.attached? && current_user.avatar.persisted?
               => image_tag polymorphic_path(current_user.avatar), style: 'width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--pico-primary);'
             = t('.my_account')
             <%- end -%>

@@ -1,7 +1,7 @@
 tr
   <%- unless options.skip_active_storage? -%>
   td
-    - if user.avatar.attached?
+    - if user.avatar.attached? && user.avatar.persisted?
       = image_tag polymorphic_path(user.avatar), style: 'max-width: 100px; max-height: 100px; border-radius: 50%'
 
   <%- end -%>
