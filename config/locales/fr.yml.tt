@@ -5,8 +5,8 @@ fr:
   add: Ajouter +
   actions: Actions
 
-  <%- if @authentication -%>
   application:
+    <%- if @authentication -%>
     header:
       my_account: Mon compte
       my_profile: Mon profil
@@ -14,7 +14,13 @@ fr:
       admin_side: Espace administrateur
       <%- end -%>
       sign_out: Déconnexion
-  <%- if @admin_dashboard -%>
+    <%- if @admin_dashboard -%>
+
+    <%- if @locales.count > 1 -%>
+    locale_switcher:
+      fr_locale: Français
+      en_locale: English
+    <%- end -%>
 
   admin:
     sidebar:

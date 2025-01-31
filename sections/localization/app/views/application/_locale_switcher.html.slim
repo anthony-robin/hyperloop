@@ -1,0 +1,10 @@
+details.dropdown
+  summary.outline role="button"
+    | &#9873;
+    =< t(".#{I18n.locale}_locale")
+
+  ul
+    - (I18n.available_locales - [I18n.locale]).each do |locale|
+      li
+        = link_to url_for(locale: locale.to_s), role: :menuitem, hreflang: locale.to_s, rel: 'alternate' do
+          = t(".#{locale}_locale")

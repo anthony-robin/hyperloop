@@ -6,6 +6,7 @@ if @locales.count > 1 || @locale_no_en
 end
 
 if @locales.count > 1
+  copy_file 'app/views/application/_locale_switcher.html.slim'
   copy_file 'app/controllers/concerns/localizable.rb'
 
   inject_into_class 'app/controllers/application_controller.rb',

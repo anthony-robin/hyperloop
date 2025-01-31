@@ -1,8 +1,8 @@
 nav role="navigation"
-  ul role="list"
+  ul
     li
       = link_to root_path do
-        strong <%= camelized %>
+        h2 <%= camelized %>
 
   input type="checkbox" id="menu-burger"
   label for="menu-burger" style="font-size: calc(var(--pico-font-size) * 1.3);" aria-label="Menu" aria-controls="menu"
@@ -36,4 +36,9 @@ nav role="navigation"
               = link_to t('.sign_out'),
                         session_path,
                         data: { turbo_method: :delete }
+    <%- end -%>
+    <%- if @locales.count > 1 -%>
+
+    li role="listitem"
+      = render 'locale_switcher'
     <%- end -%>

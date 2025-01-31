@@ -21,8 +21,17 @@ html
     = ribbonit unless Rails.env.production?
 
     main.container
-      = link_to root_path do
-        h1 <%= camelized %>
+      nav role="navigation"
+        ul role="list"
+          li
+            = link_to root_path do
+              h1 <%= camelized %>
+        <%- if @locales.count > 1 -%>
+
+        ul id="menu" role="list"
+          li role="listitem"
+            = render 'locale_switcher'
+        <%- end -%>
 
       .row-fluid
         .col-lg-6.offset-lg-3

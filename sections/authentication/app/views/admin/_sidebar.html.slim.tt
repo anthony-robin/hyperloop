@@ -10,6 +10,11 @@ aside
 
       li role="listitem"
         = link_to t('.frontend_website'), root_path
+      <%- if @locales.count > 1 -%>
+
+      li role="listitem"
+        = render 'locale_switcher'
+      <%- end -%>
 
       li role="listitem"
         details.dropdown
