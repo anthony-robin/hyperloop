@@ -1,0 +1,7 @@
+.alert.alert-info role="alert"
+  span
+    = t('.sign_in_as_html', true_user: true_user.full_name, current_user: current_user.full_name, role: current_user.role)
+
+  br
+
+  = button_to t('.back_to_admin'), stop_impersonating_admin_users_path, data: { turbo: false }

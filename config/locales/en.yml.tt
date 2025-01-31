@@ -4,6 +4,9 @@ en:
   back: ↞ Back
   add: Add +
   actions: Actions
+  <%- if @admin_dashboard -%>
+  impersonate: Sign in as
+  <%- end -%>
 
   application:
     <%- if @authentication -%>
@@ -14,13 +17,14 @@ en:
       admin_side: Admin side
       <%- end -%>
       sign_out: Sign out
-    <%- if @admin_dashboard -%>
 
+    <%- end -%>
     <%- if @locales.count > 1 -%>
     locale_switcher:
       fr_locale: Français
       en_locale: English
     <%- end -%>
+  <%- if @admin_dashboard -%>
 
   admin:
     sidebar:
@@ -28,6 +32,10 @@ en:
       my_profile: My profile
       frontend_website: ↞ Website
       sign_out: Sign out
+
+    impersonated:
+      sign_in_as_html: You (<strong>%{true_user}</strong>) are signed in as <strong>%{current_user}</strong> (%{role})
+      back_to_admin: Back to my account
 
     dashboards:
       show:
@@ -52,6 +60,7 @@ en:
       destroy:
         notice: User has been destroyed
   <%- end -%>
+  <%- if @authentication -%>
 
   passwords:
     new:

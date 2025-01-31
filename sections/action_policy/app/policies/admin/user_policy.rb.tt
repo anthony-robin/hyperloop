@@ -33,5 +33,14 @@ module Admin
     def destroy?
       update?
     end
+    <%- if @admin_dashboard -%>
+
+    def impersonate?
+      return false if user == record
+      return true if user.super_admin?
+
+      record.standard?
+    end
+    <%- end -%>
   end
 end

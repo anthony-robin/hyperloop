@@ -14,10 +14,13 @@ tr
   td
     - if allowed_to?(:update?, user)
       = link_to t('edit'), edit_admin_user_path(user)
+      br
+      br
+
+    - if allowed_to?(:impersonate?, user)
+      = button_to t('impersonate'), impersonate_admin_user_path(user), data: { turbo: false }, class: 'outline'
 
     - if allowed_to?(:destroy?, user)
-      br
-      br
       = button_to t('destroy'),
                   admin_user_path(user),
                   method: :delete,
