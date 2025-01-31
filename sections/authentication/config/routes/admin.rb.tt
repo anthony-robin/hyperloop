@@ -2,7 +2,14 @@ get '/admin', to: redirect('/admin/dashboard')
 
 namespace :admin do
   resource :dashboard, only: :show
+  <%- if @admin_dashboard -%>
+  resources :users, except: :show do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
+  <%- else -%>
   resources :users, except: :show
+  <%- end -%>
 end
 
 resolve('Dashboard') { route_for(:dashboard) }

@@ -70,6 +70,7 @@ In development:
 ### Features
 
 - Rails authentication comes with `session`, `registration` and `reset password` features preconfigured as well as related mailers.
+- A minimal admin dashboard is created if requested on generator prompt. This feature includes the [pretender](https://github.com/ankane/pretender) gem to sign in as another user to manage it easily.
 - SEO is preconfigured to work in any pages by default and title/description can be specified directly in `seo.{locale}.yml` file.
 - Default browser confirm modal as been replaced with a pretty and friendly one following excellent [gorails tutorial](https://gorails.com/episodes/custom-hotwire-turbo-confirm-modals)
 - Database is seed with default users corresponding to each access level

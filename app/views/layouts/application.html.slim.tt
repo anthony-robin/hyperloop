@@ -32,6 +32,10 @@ html
       .row-fluid
         .col-12.col-lg-6.offset-lg-3
           #flash= render 'flash'
+          <%- if @admin_dashboard -%>
+          = render 'admin/impersonated' if current_user != true_user
+
+          <%- end -%>
           = yield
 
     = render 'turbo_confirm'

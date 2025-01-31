@@ -128,10 +128,20 @@ end
 # Admin dashboard
 
 if @admin_dashboard
-  copy_file 'config/routes/admin.rb'
+  template 'config/routes/admin.rb.tt'
   directory 'app/controllers/admin'
   directory 'app/views/admin'
   template 'app/views/layouts/admin.html.slim'
+
+  gem 'pretender'
+
+  inject_into_file 'app/controllers/application_controller.rb', after: /allow_browser versions: :modern\n/ do
+    <<-RUBY
+
+      impersonates :user
+
+    RUBY
+  end
 
   run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 

@@ -28,6 +28,10 @@ html
 
         .col-12.col-md-9.col-lg-10
           #flash= render 'flash'
+          <%- if @admin_dashboard -%>
+          = render 'admin/impersonated' if current_user != true_user
+
+          <%- end -%>
           = yield
 
     = render 'turbo_confirm'

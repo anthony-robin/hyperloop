@@ -1,6 +1,10 @@
 module Admin
   class UsersController < ApplicationController
+    <%- if @admin_dashboard -%>
+    before_action :set_user, only: %i[edit update destroy impersonate]
+    <%- else -%>
     before_action :set_user, only: %i[edit update destroy]
+    <%- end -%>
 
     # @route GET /admin/users (admin_users)
     def index
@@ -64,6 +68,22 @@ module Admin
 
       redirect_to admin_users_path, notice: t('.notice')
     end
+    <%- if @admin_dashboard -%>
+
+    # @route POST /admin/users/:id/impersonate (impersonate_admin_user)
+    def impersonate
+      authorize! @user
+
+      impersonate_user(@user)
+      redirect_to root_path
+    end
+
+    # @route POST /admin/users/stop_impersonating (stop_impersonating_admin_users)
+    def stop_impersonating
+      stop_impersonating_user
+      redirect_to admin_users_path
+    end
+    <%- end -%>
 
     private
 

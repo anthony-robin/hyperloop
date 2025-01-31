@@ -4,6 +4,9 @@ fr:
   back: ↞ Retour
   add: Ajouter +
   actions: Actions
+  <%- if @admin_dashboard -%>
+  impersonate: Se connecter en tant que
+  <%- end -%>
 
   application:
     <%- if @authentication -%>
@@ -14,13 +17,14 @@ fr:
       admin_side: Espace administrateur
       <%- end -%>
       sign_out: Déconnexion
-    <%- if @admin_dashboard -%>
 
+    <%- end -%>
     <%- if @locales.count > 1 -%>
     locale_switcher:
       fr_locale: Français
       en_locale: English
     <%- end -%>
+  <%- if @admin_dashboard -%>
 
   admin:
     sidebar:
@@ -28,6 +32,10 @@ fr:
       my_profile: Mon profil
       frontend_website: ↞ Site
       sign_out: Déconnexion
+
+    impersonated:
+      sign_in_as_html: Vous (<strong>%{true_user}</strong>) êtes connecté en tant que <strong>%{current_user}</strong> (%{role})
+      back_to_admin: Revenir à mon compte
 
     dashboards:
       show:
@@ -52,6 +60,7 @@ fr:
       destroy:
         notice: L'utilisateur a bien été supprimé
   <%- end -%>
+  <%- if @authentication -%>
 
   passwords:
     new:
