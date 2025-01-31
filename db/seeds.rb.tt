@@ -3,7 +3,7 @@ require 'open-uri'
 
 puts 'Seeding users...'
 
-%i[standard admin super_admin].each do |role|
+%i[standard admin super_admin].reverse.each do |role|
   user = User.create!(
     email_address: "#{role}@demo.test",
     first_name: FFaker::Name.first_name,
