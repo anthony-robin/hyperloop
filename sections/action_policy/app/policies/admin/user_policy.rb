@@ -1,6 +1,6 @@
 module Admin
   class UserPolicy < ApplicationPolicy
-    pre_check :allow_admins
+    pre_check :require_admin!
 
     def index?
       true
