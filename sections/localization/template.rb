@@ -15,6 +15,17 @@ if @locales.count > 1
     include Localizable
     RUBY
   end
+
+  # Locales
+
+  template 'config/locales/routes.en.yml' if 'en'.in?(@locales)
+  template 'config/locales/routes.fr.yml' if 'fr'.in?(@locales)
+
+  (@locales - %w[en fr]).each do |locale|
+    template 'config/locales/routes.en.yml',
+             "config/locales/routes.#{locale}.yml"
+    gsub_file "config/locales/routes.#{locale}.yml", 'en:', "#{locale}:"
+  end
 end
 
 inject_into_file 'config/application.rb', after: /# config.eager_load_paths .+/ do
@@ -23,16 +34,6 @@ inject_into_file 'config/application.rb', after: /# config.eager_load_paths .+/ 
   config.i18n.default_locale = :#{@locales.first}
   config.i18n.available_locales = #{@locales.map(&:to_sym)}
   RUBY
-end
-
-# Locales
-template 'config/locales/routes.en.yml' if 'en'.in?(@locales)
-template 'config/locales/routes.fr.yml' if 'fr'.in?(@locales)
-
-(@locales - %w[en fr]).each do |locale|
-  template 'config/locales/routes.en.yml',
-           "config/locales/routes.#{locale}.yml"
-  gsub_file "config/locales/routes.#{locale}.yml", 'en:', "#{locale}:"
 end
 
 remove_file 'config/locales/en.yml' unless 'en'.in?(@locales)

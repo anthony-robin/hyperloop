@@ -23,6 +23,20 @@ Rails/SkipsModelValidations:
 
 Rails/Output:
   Enabled: false
+<%- unless options.slip_test? -%>
+
+# Check that left braces for adjacent single line lets are aligned.
+RSpec/AlignLeftLetBrace:
+  Enabled: false
+
+# Check that right braces for adjacent single line lets are aligned.
+RSpec/AlignRightLetBrace:
+  Enabled: false
+
+# Check for long examples.
+RSpec/ExampleLength:
+  Enabled: false
+<%- end -%>
 
 Style/ClassVars:
   Enabled: false

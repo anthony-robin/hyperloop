@@ -20,13 +20,14 @@ template 'app/models/user.rb', force: true
 template 'app/views/layouts/session.html.slim'
 directory 'app/views/me'
 copy_file 'config/routes/me.rb'
+gsub_file 'config/routes.rb', '# /me template', 'draw :me'
 
 # Views not generated in slim :(
 directory 'app/views/registrations'
 directory 'app/views/sessions', force: true
 directory 'app/views/passwords', force: true unless options.skip_action_mailer?
 
-gsub_file 'config/routes.rb', "resource :session\n  resources :passwords, param: :token", '' if @locales.count > 1
+gsub_file 'config/routes.rb', "resource :session\n  resources :passwords, param: :token", '' # if @locales.count > 1
 
 # Locales
 template 'config/locales/activerecord.en.yml' if 'en'.in?(@locales)
@@ -66,9 +67,16 @@ inject_into_file 'app/controllers/sessions_controller.rb',
                  before: 'def new' do
   <<-RUBY
   def show
-    redirect_to new_session_path
+    # `show` is present only to avoid a 404 when accessing /session
   end
 
+  RUBY
+end
+
+inject_into_file 'app/controllers/sessions_controller.rb',
+                 after: "def new\n" do
+  <<-RUBY
+  redirect_to root_path if authenticated?
   RUBY
 end
 
@@ -103,6 +111,8 @@ end
 template 'db/seeds.rb', force: true
 rails_command 'db:migrate db:seed'
 
+copy_file 'spec/requests/me/profiles_spec.rb' unless options.skip_test?
+
 # Mailers
 
 unless options.skip_action_mailer?
@@ -116,6 +126,24 @@ unless options.skip_action_mailer?
   end
 
   gsub_file 'app/mailers/passwords_mailer.rb', ' subject: "Reset your password",', ''
+
+  unless options.skip_test?
+    copy_file 'spec/mailers/passwords_mailer_spec.rb'
+
+    # Move mailer preview to spec folder
+    empty_directory 'spec/mailers/previews'
+    FileUtils.move 'test/mailers/previews/passwords_mailer_preview.rb', 'spec/mailers/previews/passwords_mailer_preview.rb',
+                   force: true
+
+    remove_dir 'test'
+  end
+end
+
+unless options.skip_test?
+  copy_file 'spec/models/user_spec.rb'
+  copy_file 'spec/requests/sessions_spec.rb'
+  copy_file 'spec/requests/registrations_spec.rb'
+  copy_file 'spec/requests/passwords_spec.rb'
 end
 
 run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
@@ -128,10 +156,20 @@ end
 # Admin dashboard
 
 if @admin_dashboard
-  template 'config/routes/admin.rb.tt'
   directory 'app/controllers/admin'
   directory 'app/views/admin'
   template 'app/views/layouts/admin.html.slim'
+
+  template 'config/routes/admin.rb.tt'
+  gsub_file 'config/routes.rb', '# /admin template', 'draw :admin'
+
+  unless options.skip_active_job?
+    inject_into_file 'config/initializers/mission_control.rb', before: /^end/ do
+      <<-RUBY
+      MissionControl::Jobs.base_controller_class = 'Admin::ApplicationController'
+      RUBY
+    end
+  end
 
   gem 'pretender'
 
@@ -141,6 +179,11 @@ if @admin_dashboard
       impersonates :user
 
     RUBY
+  end
+
+  unless options.skip_test?
+    copy_file 'spec/requests/admin/dashboards_spec.rb'
+    copy_file 'spec/requests/admin/users_spec.rb'
   end
 
   run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?

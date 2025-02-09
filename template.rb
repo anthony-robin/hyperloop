@@ -49,20 +49,21 @@ after_bundle do
   apply 'sections/rubocop/template.rb' unless options.skip_rubocop?
   apply 'sections/slim_template/template.rb'
   apply 'sections/simple_form/template.rb'
-  apply 'sections/mailers/template.rb' unless options.skip_action_mailer?
   apply 'sections/flash/template.rb'
   apply 'sections/pagy/template.rb'
+  apply 'sections/mailers/template.rb' unless options.skip_action_mailer?
   apply 'sections/localization/template.rb'
 
   apply 'sections/storage/template.rb' unless options.skip_active_storage?
   apply 'sections/rich_text/template.rb' unless options.skip_action_text?
 
+  apply 'sections/_base/template.rb'
+  apply 'sections/specs/template.rb' unless options.skip_test?
+
   if @authentication
     apply 'sections/authentication/template.rb'
     apply 'sections/action_policy/template.rb'
   end
-
-  apply 'sections/_base/template.rb'
 
   if options[:css] == 'tailwind'
     apply 'sections/tailwindcss/template.rb'

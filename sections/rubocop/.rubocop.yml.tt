@@ -5,6 +5,10 @@ inherit_from:
 require:
   - rubocop-performance
   - rubocop-rails
+  <%- unless options.skip_test? -%>
+  - rubocop-rspec
+  - rubocop-factory_bot
+  <%- end -%>
 
 AllCops:
   SuggestExtensions: false

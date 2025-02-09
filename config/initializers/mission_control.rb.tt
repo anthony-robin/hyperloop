@@ -1,5 +1,0 @@
-Rails.application.configure do
-  <%- if @authentication && @admin_dashboard -%>
-  MissionControl::Jobs.base_controller_class = 'Admin::ApplicationController'
-  <%- end -%>
-end

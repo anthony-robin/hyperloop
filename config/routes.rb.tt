@@ -23,9 +23,9 @@ Rails.application.routes.draw do
     resources :passwords, param: :token, only: %i[new create edit update]
     <%- end -%>
 
-    draw :me
+    # /me template
     <%- if @admin_dashboard -%>
-    draw :admin
+    # /admin template
     <%- end -%>
     <%- end -%>
   end
@@ -39,9 +39,9 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: %i[new create edit update]
   <%- end -%>
 
-  draw :me
+  # /me template
   <%- if @admin_dashboard -%>
-  draw :admin
+  # /admin template
   <%- end -%>
   <%- end -%>
   <%- end -%>
