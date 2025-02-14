@@ -66,6 +66,7 @@ In development:
 In test (unless `--skip-test` flag):
 
 - [rspec-rails](https://github.com/rspec/rspec-rails) to test requests, models, mailers, ...
+- [factory_bot](https://github.com/thoughtbot/factory_bot) to define Ruby objects as test data
 - [simplecov](https://github.com/simplecov-ruby/simplecov) to get code coverage of the app
 - [rubocop-rspec](https://github.com/rubocop/rubocop-rspec) to follow rspec related rules and best practices
 

@@ -107,6 +107,7 @@ Rails/UnknownEnv:
     - test
     - staging
     - production
+<%- unless options.skip_test? -%>
 
 # Check that before/after(:all) isn't being used.
 RSpec/BeforeAfterAll:
@@ -124,7 +125,6 @@ RSpec/ContextWording:
     - when
     - with
     - without
-<%- unless options.skip_test? -%>
 
 # Check for consistent style of change matcher.
 RSpec/ExpectChange:
