@@ -15,13 +15,13 @@ run 'bundle install'
 gsub_file 'config/application.rb', /# config.time_zone = .+/, "config.time_zone = 'Europe/Paris'"
 
 # Initializers
-copy_file 'config/initializers/generators.rb'
+template 'config/initializers/generators.rb'
 copy_file 'config/initializers/inflections.rb', force: true
 copy_file 'config/initializers/ribbonit.rb'
-template 'config/initializers/mission_control.rb' unless options.skip_active_job?
+copy_file 'config/initializers/mission_control.rb' unless options.skip_active_job?
 
 # Homepage
-generate :controller, 'welcome', 'index', '--skip-routes'
+generate :controller, 'welcome', 'index', '--skip-routes --skip-test'
 
 # Models
 inject_into_file 'app/models/application_record.rb', before: /^end/ do

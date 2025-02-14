@@ -3,8 +3,10 @@ Rails.application.config.generators do |g|
   g.assets false
   g.helper false
   g.jbuilder false
+  <%- unless options.skip_test? -%>
   g.view_specs false
   g.routing_specs false
-  g.test_framework nil
+  g.test_framework :rspec
+  <%- end -%>
   g.template_engine :slim
 end

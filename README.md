@@ -61,7 +61,13 @@ In development:
 - [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to intercept emails and print them in browser
 - [rubocop](https://github.com/rubocop/rubocop) and its extensions for coding conventions (very opinionated)
 - [ribbonit](https://github.com/anthony-robin/ribbonit) to display Ruby and Rails information
-- [spark](https://github.com/hotwired/spark) to reload browser page on HTML, CSS, JS modifications.
+- [spark](https://github.com/hotwired/spark) to reload browser page on HTML, CSS, JS modifications
+
+In test (unless `--skip-test` flag):
+
+- [rspec-rails](https://github.com/rspec/rspec-rails) to test requests, models, mailers, ...
+- [simplecov](https://github.com/simplecov-ruby/simplecov) to get code coverage of the app
+- [rubocop-rspec](https://github.com/rubocop/rubocop-rspec) to follow rspec related rules and best practices
 
 ### Frontend
 

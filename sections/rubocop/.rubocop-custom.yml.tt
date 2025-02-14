@@ -108,6 +108,44 @@ Rails/UnknownEnv:
     - staging
     - production
 
+# Check that before/after(:all) isn't being used.
+RSpec/BeforeAfterAll:
+  Exclude:
+    - spec/spec_helper.rb
+    - spec/rails_helper.rb
+    - spec/support/**/*.rb
+
+# `context` block descriptions should start with 'when', or 'with'
+RSpec/ContextWording:
+  Prefixes:
+    - by
+    - for
+    - that
+    - when
+    - with
+    - without
+<%- unless options.skip_test? -%>
+
+# Check for consistent style of change matcher.
+RSpec/ExpectChange:
+  EnforcedStyle: block
+
+# Check for nested example groups.
+RSpec/NestedGroups:
+  Max: 5
+
+# Check for consistent method usage for negating expectations.
+RSpec/NotToNot:
+  EnforcedStyle: to_not
+
+# Check for consistent style of stub's return setting.
+RSpec/ReturnFromStub:
+  EnforcedStyle: block
+
+FactoryBot/ConsistentParenthesesStyle:
+  EnforcedStyle: omit_parentheses
+<%- end -%>
+
 # Check for the formatting of empty method definitions.
 Style/EmptyMethod:
   EnforcedStyle: expanded

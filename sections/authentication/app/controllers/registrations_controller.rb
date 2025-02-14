@@ -14,13 +14,16 @@ class RegistrationsController < ApplicationController
       start_new_session_for @user
       redirect_to root_path, notice: t('.notice')
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
   def user_params
-    params.expect(user: %i[email_address password password_confirmation])
+    params.expect(user: %i[
+                    email_address password password_confirmation
+                    first_name last_name
+                  ])
   end
 end

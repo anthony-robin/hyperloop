@@ -6,12 +6,21 @@ end
 
 inject_into_file 'config/environments/development.rb', before: /^end/ do
   <<-RUBY
+
     config.action_mailer.default_url_options = {
       host: 'http://localhost', port: ENV.fetch('PORT', 3000)
     }
     config.action_mailer.delivery_method = :letter_opener_web
     config.action_mailer.perform_deliveries = true
   RUBY
+end
+
+unless options.skip_test?
+  inject_into_file 'config/environments/development.rb', after: /config.action_mailer.perform_deliveries = true\n/ do
+    <<-RUBY
+    config.action_mailer.preview_paths << Rails.root.join('spec/mailers/previews')
+    RUBY
+  end
 end
 
 run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?

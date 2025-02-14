@@ -1,0 +1,32 @@
+require 'rails_helper'
+
+RSpec.describe 'Welcome' do
+  describe 'GET /' do
+    <%- if @authentication -%>
+    subject(:action) { get '/' }
+
+    context 'when user is authentified' do
+      let(:user) { create :user, :standard }
+
+      before do
+        sign_in(user)
+        action
+      end
+
+      it { expect(response).to have_http_status :ok }
+    end
+
+    context 'when user is not authentified' do
+      before { action }
+
+      it { expect(response).to have_http_status :redirect }
+      it { expect(response).to redirect_to new_session_path }
+    end
+
+    <%- else -%>
+    subject! { get '/' }
+
+    it { expect(response).to have_http_status :ok }
+    <%- end -%>
+  end
+end

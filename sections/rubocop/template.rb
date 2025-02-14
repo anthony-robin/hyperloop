@@ -8,11 +8,20 @@ insert_into_file 'Gemfile', after: /^group :development, :test do\n/ do
   GEMS
 end
 
+unless options.skip_test?
+  insert_into_file 'Gemfile', after: /^group :development, :test do\n/ do
+    <<-GEMS
+    gem 'rubocop-rspec'
+    gem 'rubocop-factory_bot'
+    GEMS
+  end
+end
+
 run 'bundle install'
 
-copy_file '.rubocop.yml', force: true
-copy_file '.rubocop-custom.yml'
-copy_file '.rubocop-disabled.yml'
+template '.rubocop.yml', force: true
+template '.rubocop-custom.yml'
+template '.rubocop-disabled.yml'
 
 gsub_file 'Gemfile', '# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]', ''
 gsub_file 'Gemfile', 'gem "rubocop-rails-omakase", require: false', ''
