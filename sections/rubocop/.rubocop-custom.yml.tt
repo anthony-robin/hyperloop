@@ -48,10 +48,6 @@ Layout/ClassStructure:
     - private_delegate
     - private_methods
 
-# Align ends correctly.
-Layout/EndAlignment:
-  EnforcedStyleAlignWith: variable
-
 # This cops checks the indentation of the first key in a hash literal where the opening brace and the first key are on separate lines.
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
