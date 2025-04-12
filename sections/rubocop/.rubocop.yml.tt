@@ -2,7 +2,7 @@ inherit_from:
   - .rubocop-custom.yml
   - .rubocop-disabled.yml
 
-require:
+plugins:
   - rubocop-performance
   - rubocop-rails
   <%- unless options.skip_test? -%>
