@@ -11,6 +11,13 @@ end
 
 run 'bundle install'
 
+inject_into_file 'config/environments/development.rb', before: /^end/ do
+  <<-RUBY
+
+  config.hotwire.spark.html_extensions += ['slim']
+  RUBY
+end
+
 # Config
 gsub_file 'config/application.rb', /# config.time_zone = .+/, "config.time_zone = 'Europe/Paris'"
 
