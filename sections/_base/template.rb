@@ -103,5 +103,5 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Base scaffold and config for the project'"
+  git commit: "-n -m '[Hyperloop] Base scaffold and config for the project'"
 end

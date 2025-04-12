@@ -75,5 +75,5 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Add and configure `rspec` and `simplecov`'"
+  git commit: "-n -m '[Hyperloop] Add and configure `rspec` and `simplecov`'"
 end

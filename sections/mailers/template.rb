@@ -27,5 +27,5 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Configure mailer in development with `letter_opener_web`'"
+  git commit: "-n -m '[Hyperloop] Configure mailer in development with `letter_opener_web`'"
 end

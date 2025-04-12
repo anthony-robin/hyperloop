@@ -150,7 +150,7 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Install and configure Rails 8 authentication'"
+  git commit: "-n -m '[Hyperloop] Install and configure Rails 8 authentication'"
 end
 
 # Admin dashboard
@@ -190,6 +190,6 @@ if @admin_dashboard
 
   unless options.skip_git?
     git add: '-A .'
-    git commit: "-n -m 'Scaffold admin dashboard'"
+    git commit: "-n -m '[Hyperloop] Scaffold admin dashboard'"
   end
 end

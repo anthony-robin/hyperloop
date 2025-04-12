@@ -20,5 +20,5 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Setup TailwindCSS default style and use `flowbite` js library'"
+  git commit: "-n -m '[Hyperloop] Setup TailwindCSS default style and use `flowbite` js library'"
 end

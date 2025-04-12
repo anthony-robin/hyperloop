@@ -38,5 +38,5 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Install and configure `action_policy` authorization gem'"
+  git commit: "-n -m '[Hyperloop] Install and configure `action_policy` authorization gem'"
 end

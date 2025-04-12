@@ -43,7 +43,7 @@ after_bundle do
   unless options.skip_git?
     git :init
     git add: '-A .'
-    git commit: "-m 'Initial commit'"
+    git commit: "-m '[Hyperloop] Initial commit'"
   end
 
   apply 'sections/rubocop/template.rb' unless options.skip_rubocop?

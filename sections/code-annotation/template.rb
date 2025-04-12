@@ -20,5 +20,5 @@ run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
 unless options.skip_git?
   git add: '-A .'
-  git commit: "-n -m 'Install and configure `annotaterb` and `chusaku` gems'"
+  git commit: "-n -m '[Hyperloop] Install and configure `annotaterb` and `chusaku` gems'"
 end
