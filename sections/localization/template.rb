@@ -33,6 +33,7 @@ inject_into_file 'config/application.rb', after: /# config.eager_load_paths .+/ 
 
   config.i18n.default_locale = :#{@locales.first}
   config.i18n.available_locales = #{@locales.map(&:to_sym)}
+  config.i18n.fallbacks = true
   RUBY
 end
 
