@@ -93,5 +93,11 @@ def print_final_instructions
   say "http://localhost:#{@port}", :yellow
   say
   say 'Database is already filled with default values of db/seeds.rb. Enjoy!'
+
+  if @authentication
+    say '=> Connect as admin with credentials "[super_]admin@demo.test" / "password"', :yellow
+    say
+  end
+
   say '============================================================='
 end
