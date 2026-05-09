@@ -46,6 +46,7 @@ after_bundle do
     git commit: "-m '[Hyperloop] Initial commit'"
   end
 
+  apply 'sections/herb/template.rb'
   apply 'sections/rubocop/template.rb' unless options.skip_rubocop?
   apply 'sections/simple_form/template.rb'
   apply 'sections/flash/template.rb'
