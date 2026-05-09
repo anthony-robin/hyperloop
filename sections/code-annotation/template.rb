@@ -9,8 +9,8 @@ end
 
 run 'bundle install'
 
-copy_file 'lib/tasks/annotaterb.rake'
-copy_file '.annotaterb.yml'
+generate 'annotate_rb:hook'
+copy_file 'config/annotaterb.yml'
 
 run 'bundle exec chusaku'
 run 'bundle exec annotaterb models'
