@@ -1,0 +1,16 @@
+<article>
+  <h2><%= t('.title') %></h2>
+
+  <%= simple_form_for '', url: password_path(params[:token]), method: :put do |f| %>
+    <%= f.input :password,
+                required: true,
+                autocomplete: "new-password" %>
+
+    <%= f.input :password_confirmation,
+                as: :password,
+                required: true,
+                autocomplete: "new-password" %>
+
+    <%= f.button :submit, t('.submit') %>
+  <% end %>
+</article>

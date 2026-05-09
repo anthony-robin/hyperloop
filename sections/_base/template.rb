@@ -11,13 +11,6 @@ end
 
 run 'bundle install'
 
-inject_into_file 'config/environments/development.rb', before: /^end/ do
-  <<-RUBY
-
-  config.hotwire.spark.html_extensions += ['slim']
-  RUBY
-end
-
 # Config
 gsub_file 'config/application.rb', /# config.time_zone = .+/, "config.time_zone = 'Europe/Paris'"
 
@@ -67,10 +60,9 @@ ENV
 run 'dotenv -t .env'
 
 # Application template
-template 'app/views/layouts/application.html.slim'
-remove_file 'app/views/layouts/application.html.erb'
-copy_file 'app/views/application/_turbo_confirm.html.slim'
-template 'app/views/application/_header.html.slim'
+template 'app/views/layouts/application.html.erb', force: true
+copy_file 'app/views/application/_turbo_confirm.html.erb'
+template 'app/views/application/_header.html.erb'
 
 # SEO module
 template 'app/helpers/seo_helper.rb'

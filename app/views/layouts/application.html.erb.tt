@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <%%= seo_meta_tags %>
+    <%%= csrf_meta_tags %>
+    <%%= csp_meta_tag %>
+
+    <%%= yield :head %>
+
+    <%%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <%- if options[:css] == 'tailwind' -%>
+    <%%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%- elsif options[:css].blank? -%>
+    <%%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.10/css/pico.min.css' %>
+    <%%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+    <%%= stylesheet_link_tag 'flash', 'data-turbo-track': 'reload' %>
+    <%- end -%>
+
+    <%%= stylesheet_link_tag 'ribbon' unless Rails.env.production? %>
+
+    <%%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%%= ribbonit unless Rails.env.production? %>
+
+    <header class="container">
+      <%%= render 'header' %>
+    </header>
+
+    <main class="container">
+      <div class="row-fluid">
+        <div class="col-12 col-lg-6 offset-lg-3">
+          <div id="flash"><%%= render 'flash' %></div>
+
+          <%- if @admin_dashboard -%>
+          <%%= render 'admin/impersonated' if current_user != true_user %>
+          <%- end -%>
+
+          <%%= yield %>
+        </div>
+      </div>
+    </main>
+
+    <%%= render 'turbo_confirm' %>
+  </body>
+</html>

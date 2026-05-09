@@ -1,0 +1,37 @@
+<article>
+  <h2><%= t('.title') %></h2>
+
+  <%= simple_form_for @user,
+                      url: registration_path,
+                      html: { \
+                      data: { turbo: false } \
+                      } do |f| %>
+    <%= f.input :email_address,
+                as: :email,
+                required: true,
+                autofocus: true,
+                autocomplete: "username",
+                input_html: { value: params.dig(:user, :email_address) } %>
+
+    <%= f.input :password,
+                required: true,
+                autocomplete: "current-password",
+                hint: false %>
+
+    <%= f.input :password_confirmation,
+                as: :password,
+                required: true,
+                autocomplete: "current-password",
+                hint: false %>
+
+    <%= f.button :submit, t('.title') %>
+  <% end %>
+
+  <div>
+    <%= link_to t('.forgot_password'), new_password_path %>
+
+    <br>
+
+    <%= link_to t('.sign_in'), new_session_path %>
+  </div>
+</article>

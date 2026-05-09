@@ -1,0 +1,25 @@
+<article>
+  <h2><%%= t('.title') %></h2>
+
+  <section role="form">
+    <%%= simple_form_for current_user, url: [:me, :profile] do |f| %>
+      <%%= f.input :first_name %>
+      <%%= f.input :last_name %>
+      <%%= f.input :email_address %>
+
+      <%- unless options.skip_active_storage? -%>
+      <div class="row-fluid">
+        <%%= f.input :avatar, as: :file, wrapper_html: { class: 'col-12 col-md-8' } %>
+
+        <%% if f.object.avatar.attached? && f.object.avatar.persisted? %>
+          <%%= image_tag polymorphic_path(f.object.avatar), alt: 'Avatar', style: 'margin: 0 auto;', class: 'col-12 col-md-4' %>
+        <%% end %>
+
+        <br>
+      </div>
+      <%- end -%>
+
+      <%%= f.button :submit, t('.submit') %>
+    <%% end %>
+  </section>
+</article>

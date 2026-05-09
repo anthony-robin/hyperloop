@@ -1,0 +1,65 @@
+<nav role="navigation">
+  <ul>
+    <li>
+      <%%= link_to root_path do %>
+        <h2><%= camelized %></h2>
+      <%% end %>
+    </li>
+  </ul>
+
+  <input id="menu-burger" type="checkbox">
+
+  <label
+    aria-controls="menu"
+    aria-label="Menu"
+    for="menu-burger"
+    style="font-size: calc(var(--pico-font-size) * 1.3);"
+  >
+    &equiv;
+  </label>
+
+  <ul id="menu" role="list">
+    <%- if @authentication -%>
+    <%% if authenticated? %>
+    <li role="listitem">
+        <details class="dropdown">
+        <summary>
+            <%- if options.skip_active_storage? -%>
+            <%%= t('.my_account') %>
+            <%- else -%>
+            <%% if current_user.avatar.attached? && current_user.avatar.persisted? %>
+                <%%= image_tag polymorphic_path(current_user.avatar), alt: 'Avatar', style: 'width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--pico-primary);' %>
+            <%% end %>
+            <%%= t('.my_account') %>
+            <%- end -%>
+        </summary>
+
+        <ul dir="rtl">
+            <li>
+            <%%= link_to t('.my_profile'), edit_me_profile_path %>
+            </li>
+
+            <%- if @admin_dashboard -%>
+            <%% if allowed_to?(:show?, with: Admin::DashboardPolicy) %>
+                <li>
+                <%%= link_to t('.admin_side'), admin_dashboard_path %>
+                </li>
+            <%% end %>
+            <%- end -%>
+
+            <li>
+            <%%= link_to t('.sign_out'), session_path, data: { turbo_method: :delete } %>
+            </li>
+        </ul>
+        </details>
+    </li>
+    <%% end %>
+    <%- end -%>
+
+    <%- if @locales.count > 1 -%>
+    <li role="listitem">
+      <%%= render 'locale_switcher' %>
+    </li>
+    <%- end -%>
+  </ul>
+</nav>

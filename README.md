@@ -42,7 +42,6 @@ $ bin/dev
 In production:
 
 - [turbo-rails](https://github.com/hotwired/turbo-rails) and [stimulus-rails]() for JavaScript related features
-- [slim-rails](https://github.com/slim-template/slim-rails) for views templates
 - [simple_form](https://github.com/heartcombo/simple_form/) for handling forms inputs
 - [pagy](https://github.com/ddnexus/pagy) for pagination
 - [meta-tags](https://github.com/kpumuk/meta-tags) for SEO friendly

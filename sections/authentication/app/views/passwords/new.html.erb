@@ -1,0 +1,21 @@
+<article>
+  <h2><%= t('.title') %></h2>
+
+  <%= simple_form_for '', url: passwords_path do |f| %>
+    <%= f.input :email_address,
+                required: true,
+                autofocus: true,
+                autocomplete: "username",
+                label: false,
+                wrapper: false,
+                input_html: { value: params[:email_address] } %>
+
+    <%= f.button :submit, t('.submit') %>
+  <% end %>
+
+  <div>
+    <%= link_to new_session_path do %>
+      <%= t('.found_my_password') %>
+    <% end %>
+  </div>
+</article>

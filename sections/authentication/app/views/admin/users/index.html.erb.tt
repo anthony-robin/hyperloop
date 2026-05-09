@@ -1,0 +1,31 @@
+<header>
+  <h2><%%= t('.title') %></h2>
+
+  <%% if allowed_to?(:create?, User) %>
+    <%%= link_to t('add'), new_admin_user_path %>
+  <%% end %>
+</header>
+
+<%%= pagy_nav(@pagy) if @pagy.pages > 1 %>
+
+<section class="overflow-auto" id="users">
+  <table class="striped">
+    <thead>
+      <tr>
+        <%- unless options.skip_active_storage? -%>
+        <th scope="col"><%%= User.human_attribute_name(:avatar) %></th>
+        <%- end -%>
+        <th scope="col"><%%= User.human_attribute_name(:full_name) %></th>
+        <th scope="col"><%%= User.human_attribute_name(:email_address) %></th>
+        <th scope="col"><%%= User.human_attribute_name(:role) %></th>
+        <th scope="col"><%%= t('actions') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%%= render @users %>
+    </tbody>
+  </table>
+</section>
+
+<%%= pagy_nav(@pagy) if @pagy.pages > 1 %>

@@ -1,0 +1,26 @@
+<article>
+  <h2><%= t('.title') %></h2>
+
+  <%= simple_form_for '', url: session_path do |f| %>
+    <%= f.input :email_address,
+                as: :email,
+                required: true,
+                autofocus: true,
+                autocomplete: "username",
+                input_html: { value: params[:email_address] } %>
+
+    <%= f.input :password,
+                required: true,
+                autocomplete: "current-password" %>
+
+    <%= f.button :submit, t('.title') %>
+  <% end %>
+
+  <div>
+    <%= link_to t('.forgot_password'), new_password_path %>
+
+    <br>
+
+    <%= link_to t('.register'), new_registration_path %>
+  </div>
+</article>

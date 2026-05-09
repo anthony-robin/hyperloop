@@ -1,0 +1,11 @@
+<header>
+  <h2><%= t('.title') %></h2>
+
+  <% if allowed_to?(:index?, User) %>
+    <%= link_to t('back'), admin_users_path %>
+  <% end %>
+</header>
+
+<section>
+  <%= render 'form', user: @user %>
+</section>

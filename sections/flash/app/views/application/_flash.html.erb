@@ -1,0 +1,15 @@
+<% flash.each do |flash_type, message| %>
+  <% if flash_type == 'notice' %>
+    <% flash_classes = 'alert-success' %>
+  <% elsif flash_type == 'info' %>
+    <% flash_classes = 'alert-info' %>
+  <% elsif flash_type == 'warning' %>
+    <% flash_classes = 'alert-warning' %>
+  <% else %>
+    <% flash_classes = 'alert-danger' %>
+  <% end %>
+
+  <div class="alert <%= flash_classes %>" role="alert">
+    <%= message %>
+  </div>
+<% end %>

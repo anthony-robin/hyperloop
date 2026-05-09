@@ -1,8 +1,0 @@
-header
-  h2= t('.title')
-
-  - if allowed_to?(:index?, User)
-    = link_to t('back'), admin_users_path
-
-section
-  = render 'form', user: @user

@@ -8,5 +8,4 @@ Rails.application.config.generators do |g|
   g.routing_specs false
   g.test_framework :rspec
   <%- end -%>
-  g.template_engine :slim
 end

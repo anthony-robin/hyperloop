@@ -8,7 +8,7 @@ inject_into_class 'app/controllers/application_controller.rb',
   RUBY
 end
 
-copy_file 'app/views/application/_flash.html.slim'
+copy_file 'app/views/application/_flash.html.erb'
 copy_file 'app/assets/stylesheets/flash.css' if options[:css].blank?
 
 inject_into_module 'app/helpers/application_helper.rb',

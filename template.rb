@@ -47,7 +47,6 @@ after_bundle do
   end
 
   apply 'sections/rubocop/template.rb' unless options.skip_rubocop?
-  apply 'sections/slim_template/template.rb'
   apply 'sections/simple_form/template.rb'
   apply 'sections/flash/template.rb'
   apply 'sections/pagy/template.rb'

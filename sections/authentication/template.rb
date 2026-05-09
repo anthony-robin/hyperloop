@@ -17,12 +17,11 @@ File.open(migration_file, 'w') { |file| file.puts updated_content }
 copy_file 'app/controllers/registrations_controller.rb'
 directory 'app/controllers/me'
 template 'app/models/user.rb', force: true
-template 'app/views/layouts/session.html.slim'
+template 'app/views/layouts/session.html.erb'
 directory 'app/views/me'
 copy_file 'config/routes/me.rb'
 gsub_file 'config/routes.rb', '# /me template', 'draw :me'
 
-# Views not generated in slim :(
 directory 'app/views/registrations'
 directory 'app/views/sessions', force: true
 directory 'app/views/passwords', force: true unless options.skip_action_mailer?
@@ -140,7 +139,7 @@ unless options.skip_action_mailer?
 end
 
 unless options.skip_test?
-  copy_file 'spec/models/user_spec.rb'
+  copy_file 'spec/models/user_spec.rb', force: true
   copy_file 'spec/requests/sessions_spec.rb'
   copy_file 'spec/requests/registrations_spec.rb'
   copy_file 'spec/requests/passwords_spec.rb'
@@ -158,7 +157,7 @@ end
 if @admin_dashboard
   directory 'app/controllers/admin'
   directory 'app/views/admin'
-  template 'app/views/layouts/admin.html.slim'
+  template 'app/views/layouts/admin.html.erb'
 
   template 'config/routes/admin.rb.tt'
   gsub_file 'config/routes.rb', '# /admin template', 'draw :admin'
