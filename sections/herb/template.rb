@@ -1,6 +1,6 @@
 source_paths.unshift(File.dirname(__FILE__))
 
-insert_into_file 'Gemfile', after: /^group :development do\n/ do
+insert_into_file 'Gemfile', after: /^group :development, :test do\n/ do
   <<-GEMS
   gem 'herb'
   GEMS

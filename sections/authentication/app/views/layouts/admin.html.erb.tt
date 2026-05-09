@@ -9,7 +9,7 @@
     <%- if options[:css] == 'tailwind' -%>
     <%%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%- elsif options[:css].blank? -%>
-    <%%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.10/css/pico.min.css' %>
+    <%%= stylesheet_link_tag "<%= @pico_cdn_url %>" %>
     <%- end -%>
 
     <%%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
@@ -31,8 +31,8 @@
 
         <div class="col-12 col-md-9 col-lg-10">
           <div id="flash"><%%= render 'flash' %></div>
-
           <%- if @admin_dashboard -%>
+
           <%%= render 'admin/impersonated' if current_user != true_user %>
           <%- end -%>
 

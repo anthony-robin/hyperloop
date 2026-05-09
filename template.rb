@@ -37,6 +37,8 @@ say '=============================================================', :green
 @locales.select! { |l| l.size == 2 } # Skip wrongly formatted locales
 @locale_no_en = @locales.any? { |l| l != 'en' }
 
+@pico_cdn_url = 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.10/css/pico.min.css'
+
 add_template_repository_to_source_path
 
 after_bundle do
