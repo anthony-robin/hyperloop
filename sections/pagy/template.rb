@@ -1,21 +1,13 @@
 source_paths.unshift(File.dirname(__FILE__))
 
-gem 'pagy'
+gem 'pagy', '>= 43'
 
 copy_file 'config/initializers/pagy.rb'
 
 inject_into_class 'app/controllers/application_controller.rb',
                   'ApplicationController' do
   <<-RUBY
-  include Pagy::Backend
-
-  RUBY
-end
-
-inject_into_module 'app/helpers/application_helper.rb',
-                   'ApplicationHelper' do
-  <<-RUBY
-  include Pagy::Frontend
+  include Pagy::Method
 
   RUBY
 end

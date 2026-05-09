@@ -6,7 +6,7 @@
   <%% end %>
 </header>
 
-<%%= pagy_nav(@pagy) if @pagy.pages > 1 %>
+<%%== @pagy.series_nav if @pagy.pages > 1 %>
 
 <section class="overflow-auto" id="users">
   <table class="striped">
@@ -28,4 +28,4 @@
   </table>
 </section>
 
-<%%= pagy_nav(@pagy) if @pagy.pages > 1 %>
+<%%== @pagy.series_nav if @pagy.pages > 1 %>

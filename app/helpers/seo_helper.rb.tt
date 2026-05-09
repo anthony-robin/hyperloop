@@ -6,8 +6,8 @@ module SEOHelper
                       reverse: true,
                       charset: 'utf-8',
                       lang: I18n.locale,
-                      prev: pagy ? pagy_prev_url(pagy) : nil,
-                      next: pagy ? pagy_next_url(pagy) : nil,
+                      prev: pagy&.page_url(:previous, absolute: true),
+                      next: pagy&.page_url(:next, absolute: true),
                       image_src: asset_url('/logo.png'),
                       og: {
                         title: :title,

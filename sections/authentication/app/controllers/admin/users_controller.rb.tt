@@ -13,7 +13,7 @@ module Admin
       <%- if options.skip_active_storage? -%>
       @pagy, @users = pagy(User.order(created_at: :desc))
       <%- else -%>
-      @pagy, @users = pagy(User.includes(:avatar_attachment).order(created_at: :desc))
+      @pagy, @users = pagy(:offset, User.includes(:avatar_attachment).order(created_at: :desc))
       <%- end -%>
     end
 

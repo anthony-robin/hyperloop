@@ -1,20 +1,38 @@
-/* Pagy pagination style */
-
 .pagy {
-  @apply flex items-center justify-center space-x-3 text-sm text-gray-500 my-8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    background-color: var(--color-base-200);
+    border: var(--border) solid var(--color-base-300);
+    border-radius: var(--radius-box);
+    padding: 0.25rem;
+}
 
-  .page {
-    a {
-      @apply block rounded-lg px-3 py-1 text-black;
-      @apply hover:bg-primary-color hover:text-white;
-    }
+.pagy a {
+    display: block;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-box);
+    text-decoration: none;
+    color: inherit;
+}
 
-    &.active a {
-      @apply text-white bg-primary-color cursor-default;
-    }
+.pagy a:not(.gap):not([href]),
+.pagy a:not(.gap):not([href]):hover {
+    background-color: var(--color-base-300);
+    color: var(--color-base-content);
+    cursor: not-allowed;
+}
 
-    &.disabled a {
-      @apply text-gray-300 bg-gray-100 cursor-default;
-    }
-  }
+.pagy a.gap,
+.pagy a.gap:hover {
+    background-color: var(--color-base-200);
+    color: var(--color-base-content);
+}
+
+.pagy a:not(.gap)[aria-current="page"],
+.pagy a:not(.gap):hover {
+    background-color: var(--color-primary);
+    color: white;
 }
