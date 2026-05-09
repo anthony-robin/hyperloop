@@ -7,13 +7,12 @@
     <%%= csp_meta_tag %>
 
     <%- if options[:css] == 'tailwind' -%>
-    <%%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%- elsif options[:css].blank? -%>
     <%%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.10/css/pico.min.css' %>
-    <%%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
-    <%%= stylesheet_link_tag 'flash', 'data-turbo-track': 'reload' %>
     <%- end -%>
 
+    <%%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%%= stylesheet_link_tag 'ribbon' unless Rails.env.production? %>
 
     <%%= javascript_importmap_tags %>

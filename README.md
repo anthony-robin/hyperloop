@@ -72,6 +72,7 @@ In test (unless `--skip-test` flag):
 ### Frontend
 
 - [PicoCSS](https://github.com/Yohn/PicoCSS) as a minimalist prototyping framework.
+- [daisyUI](https://daisyui.com/) as a minimalist framework on top of Tailwind (required `--css=tailwind` flag option).
 
 ### Features
 

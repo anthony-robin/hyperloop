@@ -1,0 +1,7 @@
+@import "https://cdn.jsdelivr.net/npm/daisyui@5";
+@import "tailwindcss";
+
+.turbo-progress-bar {
+    height: 5px;
+    background-color: var(--color-secondary);
+}
