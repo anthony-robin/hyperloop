@@ -22,19 +22,32 @@ def add_template_repository_to_source_path
   end
 end
 
-say '=============================================================', :green
-say 'Hyperloop 🚄 is building a fresh new Rails app for you ✨', :green
-say 'It could take a while, please be patient...', :green
-say '=============================================================', :green
+begin
+  require 'gum'
+rescue
+  run 'gem install gum'
+  require 'gum'
+end
 
-@port = ask('What port do you want the app to run ?', default: 3000)
-@raw_locales = ask('Which locale(s) do you want ? (eg: en,fr)', default: 'en')
+Gum::Log.info("Hyperloop 🚄 is building a fresh new Rails app for you ✨")
+Gum::Log.info("It could take a while, please be patient...")
 
-@authentication = yes?('Do you need authentication ? (Y/n)')
-@admin_dashboard = yes?('Do you need an admin dashboard ? (Y/n)') if @authentication
+@port = Gum.input(value: 3000, header: "What port do you want the app to run ?", char_limit: 4)
 
-@locales = @raw_locales.gsub(/\s+/, '').split(',').compact_blank
-@locales.select! { |l| l.size == 2 } # Skip wrongly formatted locales
+@locales = Gum.choose(['en', 'fr'], header: "Which locale(s) do you want ?", selected: ['en'], no_limit: true)
+@locales = ['en'] if @locales.blank?
+
+@authentication = Gum.confirm("Do you need authentication ?", default: true)
+@admin_dashboard = Gum.confirm("Do you need an admin dashboard ?", default: true) if @authentication
+
+data = [
+  ["Port", @port],
+  ["Locales", @locales.join('/')],
+  ["Authentication", @authentication],
+  ["Dashboard admin", @admin_dashboard]
+]
+Gum.table(data, columns: %w[Option Value], print: true)
+
 @locale_no_en = @locales.any? { |l| l != 'en' }
 
 @pico_cdn_url = 'https://cdn.jsdelivr.net/npm/@yohns/picocss@2.2.10/css/pico.min.css'
@@ -80,24 +93,27 @@ after_bundle do
 end
 
 def print_final_instructions
-  say '============================================================='
-  say 'Hyperloop 🚄 successfully created your Rails app ! 🎉🎉🎉', :green
   say
-  say 'Switch to your app by running:'
+  Gum::Log.info("Hyperloop 🚄 successfully created your Rails application ! 🎉🎉🎉")
+
+  Gum::Log.info("Switch to your app folder:")
   say "$ cd #{app_name}", :yellow
   say
-  say 'Then run:'
+
+  Gum::Log.info("Run the dev server:")
   say '$ bin/dev', :yellow
   say
-  say 'Then open:'
-  say "http://localhost:#{@port}", :yellow
+
+  Gum::Log.info("Open homepage:")
+  say "=> http://localhost:#{@port}", :yellow
   say
-  say 'Database is already filled with default values of db/seeds.rb. Enjoy!'
+
+  Gum::Log.info('Database is already filled with default values from db/seeds.rb.')
 
   if @authentication
-    say '=> Connect as admin with credentials "[super_]admin@demo.test" / "password"', :yellow
-    say
+    say '=> Connect with credentials [super_]admin@demo.test / password', :yellow
   end
 
-  say '============================================================='
+  say
+  Gum::Log.info('Happy coding !')
 end
