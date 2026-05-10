@@ -14,7 +14,8 @@ RSpec.describe PasswordsMailer do
 
     it 'renders the body', :aggregate_failures do
       freeze_time do
-        expect(mail.body.encoded).to match('You can reset your password within the next 15 minutes on this password reset page:')
+        expect(mail.body.encoded).to match('You can reset your password on')
+        expect(mail.body.encoded).to match('This link will expire in')
         expect(mail.body.encoded).to match(edit_password_url(user.password_reset_token))
       end
     end

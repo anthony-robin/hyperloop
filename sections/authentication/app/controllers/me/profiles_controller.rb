@@ -10,7 +10,7 @@ module Me
       if current_user.update(profile_params)
         redirect_to edit_me_profile_path, notice: t('.notice')
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

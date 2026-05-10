@@ -26,7 +26,7 @@ RSpec.describe 'Me::Profiles' do
     context 'when data are invalid' do
       let(:params) { { user: attributes_for(:user).merge(first_name: nil) } }
 
-      it { expect(response).to have_http_status :unprocessable_entity }
+      it { expect(response).to have_http_status :unprocessable_content }
     end
   end
 end

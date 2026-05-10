@@ -107,7 +107,7 @@ RSpec.describe 'Admin::Users' do
             { user: attributes_for(:user).merge(first_name: '') }
           end
 
-          it { expect(response).to have_http_status :unprocessable_entity }
+          it { expect(response).to have_http_status :unprocessable_content }
         end
       end
 
@@ -193,7 +193,7 @@ RSpec.describe 'Admin::Users' do
         context 'when params are invalid' do
           let(:params) { { user: { first_name: '' } } }
 
-          it { expect(response).to have_http_status :unprocessable_entity }
+          it { expect(response).to have_http_status :unprocessable_content }
         end
       end
 
