@@ -1,7 +1,7 @@
 <%- if @authentication -%>
 require 'open-uri'
 
-puts 'Seeding users...'
+$stdout.puts '[Seeds] Creating users...'
 
 %i[standard admin super_admin].reverse.each do |role|
   user = User.create!(

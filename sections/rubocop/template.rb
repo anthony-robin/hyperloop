@@ -19,8 +19,6 @@ end
 run 'bundle install'
 
 template '.rubocop.yml', force: true
-template '.rubocop-custom.yml'
-template '.rubocop-disabled.yml'
 
 gsub_file 'Gemfile', '# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]', ''
 gsub_file 'Gemfile', 'gem "rubocop-rails-omakase", require: false', ''

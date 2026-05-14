@@ -24,6 +24,11 @@ module Admin
       @user = User.new
     end
 
+    # @route GET /admin/users/:id/edit (edit_admin_user)
+    def edit
+      authorize! @user
+    end
+
     # @route POST /admin/users (admin_users)
     def create
       authorize! User
@@ -41,11 +46,6 @@ module Admin
       else
         render :new, status: :unprocessable_content
       end
-    end
-
-    # @route GET /admin/users/:id/edit (edit_admin_user)
-    def edit
-      authorize! @user
     end
 
     # @route PATCH /admin/users/:id (admin_user)
