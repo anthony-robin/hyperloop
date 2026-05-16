@@ -14,7 +14,6 @@ copy_file 'config/annotaterb.yml'
 
 run 'bundle exec chusaku'
 run 'bundle exec annotaterb models'
-run 'bundle exec annotaterb routes'
 
 run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
