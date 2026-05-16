@@ -6,6 +6,15 @@ run 'bundle install'
 
 # Rails 8 authentication
 generate 'authentication'
+
+inject_into_class 'app/controllers/welcome_controller.rb',
+                  'WelcomeController' do
+  <<-RUBY
+  allow_unauthenticated_access
+
+  RUBY
+end
+
 generate 'migration add_fields_to_user first_name:string last_name:string role:integer'
 
 # Update migration null and default value for role
@@ -110,7 +119,14 @@ end
 template 'db/seeds.rb', force: true
 rails_command 'db:migrate db:seed'
 
-copy_file 'spec/requests/me/profiles_spec.rb' unless options.skip_test?
+unless options.skip_test?
+  copy_file 'test/integration/sessions_test.rb'
+  copy_file 'test/integration/passwords_test.rb'
+  copy_file 'test/integration/me/profiles_test.rb'
+
+  run 'rm test/controllers/sessions_controller_test.rb'
+  run 'rm test/controllers/passwords_controller_test.rb'
+end
 
 # Mailers
 
@@ -125,24 +141,21 @@ unless options.skip_action_mailer?
   end
 
   gsub_file 'app/mailers/passwords_mailer.rb', ' subject: "Reset your password",', ''
-
-  unless options.skip_test?
-    copy_file 'spec/mailers/passwords_mailer_spec.rb'
-
-    # Move mailer preview to spec folder
-    empty_directory 'spec/mailers/previews'
-    FileUtils.move 'test/mailers/previews/passwords_mailer_preview.rb', 'spec/mailers/previews/passwords_mailer_preview.rb',
-                   force: true
-
-    remove_dir 'test'
-  end
 end
 
 unless options.skip_test?
-  copy_file 'spec/models/user_spec.rb', force: true
-  copy_file 'spec/requests/sessions_spec.rb'
-  copy_file 'spec/requests/registrations_spec.rb'
-  copy_file 'spec/requests/passwords_spec.rb'
+  copy_file 'test/fixtures/users.yml', force: true
+
+  inject_into_file 'test/models/user_test.rb', after: /class UserTest < ActiveSupport::TestCase\n/ do
+    <<-RUBY
+    test "#full_name returns first_name + last_name" do
+      user = users(:one)
+
+      assert_equal "John Doe", user.full_name
+    end
+
+    RUBY
+  end
 end
 
 run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
@@ -181,8 +194,8 @@ if @admin_dashboard
   end
 
   unless options.skip_test?
-    copy_file 'spec/requests/admin/dashboards_spec.rb'
-    copy_file 'spec/requests/admin/users_spec.rb'
+    copy_file 'test/integration/admin/dashboards_test.rb'
+    copy_file 'test/integration/admin/users_test.rb'
   end
 
   run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?

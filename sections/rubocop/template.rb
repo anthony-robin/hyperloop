@@ -11,8 +11,7 @@ end
 unless options.skip_test?
   insert_into_file 'Gemfile', after: /^group :development, :test do\n/ do
     <<-GEMS
-    gem 'rubocop-rspec'
-    gem 'rubocop-factory_bot'
+    gem 'rubocop-minitest'
     GEMS
   end
 end

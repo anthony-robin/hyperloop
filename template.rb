@@ -44,7 +44,7 @@ data = [
   ["Port", @port],
   ["Locales", @locales.join('/')],
   ["Authentication", @authentication],
-  ["Dashboard admin", @admin_dashboard]
+  ["Dashboard admin", @admin_dashboard || 'false']
 ]
 Gum.table(data, columns: %w[Option Value], print: true)
 
@@ -73,7 +73,7 @@ after_bundle do
   apply 'sections/rich_text/template.rb' unless options.skip_action_text?
 
   apply 'sections/_base/template.rb'
-  apply 'sections/specs/template.rb' unless options.skip_test?
+  apply 'sections/test/template.rb' unless options.skip_test?
 
   if @authentication
     apply 'sections/authentication/template.rb'
@@ -106,11 +106,11 @@ def print_final_instructions
 
   Gum::Log.info("Open homepage:")
   say "=> http://localhost:#{@port}", :yellow
-  say
-
-  Gum::Log.info('Database is already filled with default values from db/seeds.rb.')
 
   if @authentication
+    say
+    Gum::Log.info('Database is already filled with default values from db/seeds.rb.')
+
     say '=> Connect with credentials [super_]admin@demo.test / password', :yellow
   end
 

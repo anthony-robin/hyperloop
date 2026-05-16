@@ -1,3 +1,5 @@
+source_paths.unshift(File.dirname(__FILE__))
+
 gem 'dotenv-rails'
 gem 'meta-tags'
 gem 'mission_control-jobs' unless options.skip_active_job?
@@ -22,6 +24,11 @@ copy_file 'config/initializers/mission_control.rb' unless options.skip_active_jo
 
 # Homepage
 generate :controller, 'welcome', 'index', '--skip-routes --skip-test'
+
+unless options.skip_test?
+  run 'rm test/controllers/welcome_controller_test.rb'
+  copy_file 'integration/welcome_test.rb', 'test/integration/welcome_test.rb', force: true
+end
 
 # Models
 inject_into_file 'app/models/application_record.rb', before: /^end/ do
