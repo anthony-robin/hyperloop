@@ -64,8 +64,8 @@ after_bundle do
   apply 'sections/herb/template.rb'
   apply 'sections/rubocop/template.rb' unless options.skip_rubocop?
   apply 'sections/simple_form/template.rb'
-  apply 'sections/flash/template.rb'
   apply 'sections/pagy/template.rb'
+  apply 'sections/flash/template.rb'
   apply 'sections/mailers/template.rb' unless options.skip_action_mailer?
   apply 'sections/localization/template.rb'
 
