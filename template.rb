@@ -103,6 +103,7 @@ after_bundle do
 
   apply 'sections/bullet/template.rb'
   apply 'sections/code-annotation/template.rb'
+  apply 'sections/ci/template.rb'
 
   print_final_instructions
 end
