@@ -5,10 +5,12 @@ gem 'meta-tags'
 gem 'mission_control-jobs' unless options.skip_active_job?
 gem 'ribbonit'
 
-insert_into_file 'Gemfile', after: /^group :development do\n/ do
-  <<-GEMS
-  gem 'hotwire-spark'
-  GEMS
+unless options.skip_action_cable?
+  insert_into_file 'Gemfile', after: /^group :development do\n/ do
+    <<-GEMS
+    gem 'hotwire-spark'
+    GEMS
+  end
 end
 
 run 'bundle install'
@@ -82,24 +84,26 @@ template 'config/locales/seo.fr.yml' if 'fr'.in?(@locales)
   gsub_file "config/locales/seo.#{locale}.yml", 'en:', "#{locale}:"
 end
 
-# Pretty JS confirm modale
-inject_into_file 'app/javascript/application.js' do
-  <<~JAVASCRIPT
+unless options.skip_javascript?
+  # Pretty JS confirm modale
+  inject_into_file 'app/javascript/application.js' do
+    <<~JAVASCRIPT
 
-    // @see https://gorails.com/episodes/custom-hotwire-turbo-confirm-modals
-    Turbo.config.forms.confirm = (message, _element) => {
-      let dialog = document.getElementById('turbo-confirm')
+      // @see https://gorails.com/episodes/custom-hotwire-turbo-confirm-modals
+      Turbo.config.forms.confirm = (message, _element) => {
+        let dialog = document.getElementById('turbo-confirm')
 
-      dialog.querySelector('p').textContent = message
-      dialog.showModal()
+        dialog.querySelector('p').textContent = message
+        dialog.showModal()
 
-      return new Promise((resolve, _reject) => {
-        dialog.addEventListener('close', () => {
-          resolve(dialog.returnValue == 'confirm')
-        }, { once: true })
-      })
-    }
-  JAVASCRIPT
+        return new Promise((resolve, _reject) => {
+          dialog.addEventListener('close', () => {
+            resolve(dialog.returnValue == 'confirm')
+          }, { once: true })
+        })
+      }
+    JAVASCRIPT
+  end
 end
 
 # PG adapter

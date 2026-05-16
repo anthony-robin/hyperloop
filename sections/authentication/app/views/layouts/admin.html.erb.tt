@@ -14,8 +14,10 @@
 
     <%%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%%= stylesheet_link_tag 'ribbon' unless Rails.env.production? %>
+    <%- unless options.skip_javascript? -%>
 
     <%%= javascript_importmap_tags %>
+    <%- end -%>
   </head>
 
   <body>
