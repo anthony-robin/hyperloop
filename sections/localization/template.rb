@@ -1,11 +1,11 @@
 source_paths.unshift(File.dirname(__FILE__))
 
-if @locales.count > 1 || @locale_no_en
+if @locales.many? || @locale_no_en
   gem 'rails-i18n'
   gem 'route_translator'
 end
 
-if @locales.count > 1
+if @locales.many?
   copy_file 'app/views/application/_locale_switcher.html.erb'
   copy_file 'app/controllers/concerns/localizable.rb'
 

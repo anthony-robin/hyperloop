@@ -26,12 +26,12 @@ def extract_option(name, default)
   arg = ARGV.find { |a| a.start_with?("--#{name}=") }
   return default unless arg
 
-  arg.split("=").last
+  arg.split('=').last
 end
 
 begin
   require 'gum'
-rescue
+rescue StandardError
   run 'gem install gum'
   require 'gum'
 end
@@ -39,27 +39,25 @@ end
 # Can be used in the rails new command
 # @example:
 #   rails new myapp -m template.rb -- --port=4000
-@port = extract_option("port", nil)
+@port = extract_option('port', nil)
 
-Gum::Log.info("Hyperloop 🚄 is building a fresh new Rails app for you ✨")
-Gum::Log.info("It could take a while, please be patient...")
+Gum::Log.info('Hyperloop 🚄 is building a fresh new Rails app for you ✨')
+Gum::Log.info('It could take a while, please be patient...')
 
-if @port.nil?
-  @port = Gum.input(value: 3000, header: "What port do you want the app to run ?", char_limit: 4)
-end
+@port = Gum.input(value: 3000, header: 'What port do you want the app to run ?', char_limit: 4) if @port.nil?
 
-@locales = Gum.choose(['en', 'fr'], header: "Which locale(s) do you want ?", selected: ['en'], no_limit: true)
+@locales = Gum.choose(%w[en fr], header: 'Which locale(s) do you want ?', selected: ['en'], no_limit: true)
 @locales = ['en'] if @locales.blank?
 
-@authentication = Gum.confirm("Do you need authentication ?", default: true)
-@admin_dashboard = Gum.confirm("Do you need an admin dashboard ?", default: true) if @authentication
+@authentication = Gum.confirm('Do you need authentication ?', default: true)
+@admin_dashboard = Gum.confirm('Do you need an admin dashboard ?', default: true) if @authentication
 
 data = [
-  ["App name", camelized],
-  ["Port", @port],
-  ["Locales", @locales.join('/')],
-  ["Authentication", @authentication],
-  ["Dashboard admin", @admin_dashboard || 'false']
+  ['App name', camelized],
+  ['Port', @port],
+  ['Locales', @locales.join('/')],
+  ['Authentication', @authentication],
+  ['Dashboard admin', @admin_dashboard || 'false']
 ]
 Gum.table(data, columns: %w[Option Value], print: true)
 
@@ -110,17 +108,17 @@ end
 
 def print_final_instructions
   say
-  Gum::Log.info("Hyperloop 🚄 successfully created your Rails application ! 🎉🎉🎉")
+  Gum::Log.info('Hyperloop 🚄 successfully created your Rails application ! 🎉🎉🎉')
 
-  Gum::Log.info("Switch to your app folder:")
+  Gum::Log.info('Switch to your app folder:')
   say "$ cd #{app_name}", :yellow
   say
 
-  Gum::Log.info("Run the dev server:")
+  Gum::Log.info('Run the dev server:')
   say '$ bin/dev', :yellow
   say
 
-  Gum::Log.info("Open homepage:")
+  Gum::Log.info('Open homepage:')
   say "=> http://localhost:#{@port}", :yellow
 
   if @authentication

@@ -2,15 +2,15 @@ source_paths.unshift(File.dirname(__FILE__))
 
 development_group = /^group :development do\n/
 
-if File.read("Gemfile").match?(development_group)
-  inject_into_file "Gemfile", after: development_group do
+if File.read('Gemfile').match?(development_group)
+  inject_into_file 'Gemfile', after: development_group do
     <<~RUBY
       gem "annotaterb", require: false
       gem "chusaku", require: false
     RUBY
   end
 else
-  append_to_file "Gemfile" do
+  append_to_file 'Gemfile' do
     <<~RUBY
 
       group :development do

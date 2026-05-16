@@ -1,0 +1,90 @@
+plugins:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-minitest
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "bin/*"
+    - "db/*schema.rb"
+    - "lib/generators/**/*"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+
+# This cop makes sure that all numbered variables use the configured style, snake_case, normalcase, or non_integer, for their numbering.
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+  CheckSymbols: false
+  CheckMethodNames: false
+
+Rails/ActionOrder:
+  ExpectedOrder:
+    - index
+    - new
+    - create
+    - show
+    - edit
+    - update
+    - destroy
+
+Rails/DynamicFindBy:
+  AllowedMethods:
+    - find_by_password_reset_token! # Rails 8 internal used by authentication
+
+# This cop checks that environments called with Rails.env predicates exist.
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - staging
+    - production
+
+# Check for the formatting of empty method definitions.
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+## Disabled cops
+
+# Check the length of lines in the source code
+Layout/LineLength:
+  Enabled: false
+
+Lint/DuplicateBranch:
+  Enabled: false
+
+# Call super to initialize state of the parent class.
+Lint/MissingSuper:
+  Enabled: false
+
+# Disable all Metrics related cops
+Metrics:
+  Enabled: false
+
+# Method parameter must be at least 3 characters long.
+Naming/MethodParameterName:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+# This cop checks for the use of methods which skip validations.
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+# Document classes and non-namespace modules.
+Style/Documentation:
+  Enabled: false
+
+# Add the frozen_string_literal comment to the top of files to help transition from Ruby 2.3.0 to Ruby 3.0.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Use smallcase prefixes for numeric literals.
+Style/NumericLiteralPrefix:
+  Enabled: false

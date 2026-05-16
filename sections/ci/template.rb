@@ -1,6 +1,6 @@
-gsub_file "config/ci.rb",
-          "bin/setup --skip-server",
-          "bin/setup --skip-server --skip-seed"
+gsub_file 'config/ci.rb',
+          'bin/setup --skip-server',
+          'bin/setup --skip-server --skip-seed'
 
 run 'bin/rubocop -A --fail-level=E' unless options.skip_rubocop?
 
