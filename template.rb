@@ -55,6 +55,7 @@ end
 @admin_dashboard = Gum.confirm("Do you need an admin dashboard ?", default: true) if @authentication
 
 data = [
+  ["App name", camelized],
   ["Port", @port],
   ["Locales", @locales.join('/')],
   ["Authentication", @authentication],
