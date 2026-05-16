@@ -22,6 +22,13 @@ def add_template_repository_to_source_path
   end
 end
 
+def extract_option(name, default)
+  arg = ARGV.find { |a| a.start_with?("--#{name}=") }
+  return default unless arg
+
+  arg.split("=").last
+end
+
 begin
   require 'gum'
 rescue
@@ -29,10 +36,17 @@ rescue
   require 'gum'
 end
 
+# Can be used in the rails new command
+# @example:
+#   rails new myapp -m template.rb -- --port=4000
+@port = extract_option("port", nil)
+
 Gum::Log.info("Hyperloop 🚄 is building a fresh new Rails app for you ✨")
 Gum::Log.info("It could take a while, please be patient...")
 
-@port = Gum.input(value: 3000, header: "What port do you want the app to run ?", char_limit: 4)
+if @port.nil?
+  @port = Gum.input(value: 3000, header: "What port do you want the app to run ?", char_limit: 4)
+end
 
 @locales = Gum.choose(['en', 'fr'], header: "Which locale(s) do you want ?", selected: ['en'], no_limit: true)
 @locales = ['en'] if @locales.blank?

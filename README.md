@@ -29,6 +29,12 @@ Generator will ask several questions to refine configuration:
 - Is an authentication needed ?
   - If yes, does an admin dashboard is needed ?
 
+Note that you can specify the port directly in the generator command this way:
+
+```shell
+$ rails new myapp -m hyperloop/template.rb -- --port=4000
+```
+
 Wait for the end of the installer, then start it with:
 
 ```shell
